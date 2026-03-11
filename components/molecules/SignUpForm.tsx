@@ -1,5 +1,6 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -7,56 +8,101 @@ import Button from '@/components/atoms/Button/Button';
 import Input from '@/components/atoms/Input/Input';
 import { SignUpFormData } from '@/types/auth';
 
-const SignUpForm = () => {
+interface SignUpFormProps {
+    onContinue: () => void;
+}
+
+const SignUpForm = ({ onContinue }: SignUpFormProps) => {
     const form = useForm<SignUpFormData>();
 
     // STATES
-    const [ username, setUsername ] = useState<string>('');
+    const [ nickname, setNickname ] = useState<string>('');
+    const [ ready, setReady ] = useState<boolean>(false);
+
+    // MUTATIONS
+    const signUp = useMutation({
+        mutationFn: async (data: SignUpFormData) => await fetch('/api/auth/signup', {
+            body: JSON.stringify(data),
+            method: 'POST',
+        }),
+    });
 
     // METHODS
-    const handleSubmit = (data: SignUpFormData) => {
+    const handleSubmit = async (data: SignUpFormData) => {
         console.log(data);
+
+        try {
+            await signUp.mutateAsync(data);
+
+            setReady(true);
+        } catch (error: unknown) {
+            console.log(error);
+        }
+    };
+
+    const handleContinue = () => {
+        onContinue();
     };
 
     return (
         <form
-            className='flex flex-col gap-5 items-center'
+            className='flex flex-col gap-5'
             onSubmit={ form.handleSubmit(handleSubmit) }
         >
             <Controller
                 control={ form.control }
-                name='username'
+                name='nickname'
                 render={ ({ field }) =>
                     <Input
                         { ...field }
+                        className='text-center disabled:bg-green-100 disabled:border-green-600'
+                        disabled={ ready }
                         onChange={ event => {
                             field.onChange(event);
-                            setUsername(event.target.value);
+                            setNickname(event.target.value);
                         } }
                         placeholder='usuario'
-                        value={ username }
+                        value={ nickname }
                     />
                 }
             />
 
-            { username &&
+            { nickname &&
                 <div className='flex flex-col gap-2 mb-10'>
                     <div className='font-bold text-red-600'>
                         Clave:
                     </div>
 
                     <div className='font-unown text-9xl lowercase leading-14'>
-                        { username.slice(0, 3) }
+                        { nickname.slice(0, 3) }
                     </div>
                 </div>
             }
 
-            <Button
-                color='ok'
-                type='submit'
-            >
-                Registrarme
-            </Button>
+            { ready ?
+                <Button
+                    color='danger'
+                    onPress={ handleContinue }
+                >
+                    Listo, recordaré mi clave
+                </Button>
+                :
+                <div className='flex flex-col gap-1.5'>
+                    <Button
+                        color='ok'
+                        type='submit'
+                    >
+                        Registrarme
+                    </Button>
+
+                    <Button
+                        color='danger'
+                        onPress={ handleContinue }
+                    >
+                        No entiendo...
+                    </Button>
+                </div>
+            }
         </form>
     );
 };

@@ -11,6 +11,11 @@ const Home = () => {
     // STATES
     const [ action, setAction ] = useState<IntroPhraseKey>('Welcome');
 
+    // METHODS
+    const handleSignUpContinue = () => {
+        setAction('Welcome');
+    };
+
     return (
         <div className='flex flex-col gap-7 items-center p-3'>
             <div className='w-full text-center flex flex-col gap-10 py-10 px-5 bg-stone-100 border-8 border-stone-400 rounded-3xl shadow-xl'>
@@ -61,19 +66,17 @@ const Home = () => {
                     </div>
                 }
 
-                { action === 'New' && <SignUpForm /> }
+                { action === 'New' && <SignUpForm onContinue={ handleSignUpContinue } /> }
 
-                { action === 'Old' && <SignUpForm /> }
+                { action === 'Old' && <SignUpForm onContinue={ handleSignUpContinue } /> }
 
                 { action === 'Police' &&
-                    <div className='flex flex-col gap-1.5'>
-                        <Button
-                            color='danger'
-                            onPress={ () => setAction('Welcome') }
-                        >
-                            (¡Salir corriendo!)
-                        </Button>
-                    </div>
+                    <Button
+                        color='danger'
+                        onPress={ () => setAction('Welcome') }
+                    >
+                        (¡Salir corriendo!)
+                    </Button>
                 }
             </div>
 

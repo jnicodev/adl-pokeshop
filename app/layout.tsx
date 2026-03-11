@@ -5,6 +5,8 @@ import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
+import Providers from '@/app/providers';
+
 const inter = Inter({
     subsets: [ 'latin' ],
     variable: '--font-inter',
@@ -26,7 +28,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
     return (
         <html lang='es'>
             <body className={ `${ inter.variable } ${ unown.variable } antialiased bg-stone-200` }>
-                { children }
+                <Providers>
+                    { children }
+                </Providers>
             </body>
         </html>
     );

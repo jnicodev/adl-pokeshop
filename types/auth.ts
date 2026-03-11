@@ -1,5 +1,5 @@
 export type SignUpFormData = {
-    username: string;
+    nickname: string;
 };
 
 export const INTRO_PHRASES = {
