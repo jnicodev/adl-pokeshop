@@ -5,87 +5,80 @@ import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
 import SignUpForm from '@/components/molecules/SignUpForm';
-
-const phrase = {
-    '0-welcome': '¿Te conozco?',
-    '1-ask': '¿Quieres comprar Pokémon?',
-    '2-new': 'Dime como quieres que te llamemos y te daré tu clave secreta de 3 unowns',
-    '3-old': 'Entonces demuéstralo',
-    '4-police': '¡¡¡LA COMPRA Y VENTA DE POKÉMON ES ILEGAL, QUEDAS BAJO ARRESTO!!!',
-};
+import { INTRO_PHRASES, IntroPhraseKey } from '@/types/auth';
 
 const Home = () => {
-    const [ action, setAction ] = useState<string>('0-welcome');
+    // STATES
+    const [ action, setAction ] = useState<IntroPhraseKey>('Welcome');
 
     return (
         <div className='flex flex-col gap-7 items-center p-3'>
-            <div className='w-full flex flex-col gap-10 text-center py-10 px-5 bg-stone-100 border-8 border-stone-400 rounded-3xl shadow-xl'>
+            <div className='w-full text-center flex flex-col gap-10 py-10 px-5 bg-stone-100 border-8 border-stone-400 rounded-3xl shadow-xl'>
                 <h1 className='font-bold text-3xl'>
-                    { phrase[action] }
+                    { INTRO_PHRASES[action] }
                 </h1>
 
-                { action === '0-welcome' &&
+                { action === 'Welcome' &&
                     <div className='flex flex-col gap-1.5'>
                         <Button
-                            className='bg-red-200'
                             color='danger'
-                            onPress={ () => setAction('3-old') }
+                            onPress={ () => setAction('Old') }
                         >
                             Sí, sé lo que necesito...
                         </Button>
 
                         <Button
                             color='ok'
-                            onPress={ () => setAction('2-new') }
+                            onPress={ () => setAction('New') }
                         >
                             No, pero te he visto...
                         </Button>
 
                         <Button
                             color='ok'
-                            onPress={ () => setAction('1-ask') }
+                            onPress={ () => setAction('Ask') }
                         >
                             Busco una tienda...
                         </Button>
                     </div>
                 }
 
-                { action === '1-ask' &&
+                { action === 'Ask' &&
                     <div className='flex flex-col gap-1.5'>
                         <Button
                             color='ok'
-                            onPress={ () => setAction('4-police') }
+                            onPress={ () => setAction('Police') }
                         >
                             ¡Claro!
                         </Button>
 
                         <Button
                             color='danger'
-                            onPress={ () => setAction('2-new') }
+                            onPress={ () => setAction('New') }
                         >
                             No, solo &#34;productos&#34;...
                         </Button>
                     </div>
                 }
 
-                { action === '2-new' && <SignUpForm /> }
+                { action === 'New' && <SignUpForm /> }
 
-                { action === '3-old' && <SignUpForm /> }
+                { action === 'Old' && <SignUpForm /> }
 
-                { action === '4-police' &&
+                { action === 'Police' &&
                     <div className='flex flex-col gap-1.5'>
                         <Button
                             color='danger'
-                            onPress={ () => setAction('0-welcome') }
+                            onPress={ () => setAction('Welcome') }
                         >
-                            [Huir]
+                            (¡Salir corriendo!)
                         </Button>
                     </div>
                 }
             </div>
 
-            { action === '4-police' ?
-                <div className='w-[250px] h-[450px] relative'>
+            { action === 'Police' ?
+                <div className='w-62.5 h-112.5 relative'>
                     <Image
                         alt='a'
                         fill
@@ -94,7 +87,7 @@ const Home = () => {
                     />
                 </div>
                 :
-                <div className='w-[200px] h-[450px] relative'>
+                <div className='w-50 h-112.5 relative'>
                     <Image
                         alt='a'
                         fill
