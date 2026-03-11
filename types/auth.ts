@@ -1,6 +1,6 @@
 export type SignInFormData = {
     nickname: string;
-    password: string;
+    password: string[];
 };
 
 export type SignUpFormData = {

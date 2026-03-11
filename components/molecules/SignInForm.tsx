@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { CheckboxGroup } from 'react-aria-components';
 import { Controller, useForm } from 'react-hook-form';
@@ -8,13 +9,14 @@ import { Controller, useForm } from 'react-hook-form';
 import Button from '@/components/atoms/Button/Button';
 import Checkbox from '@/components/atoms/Checkbox/Checkbox';
 import Input from '@/components/atoms/Input/Input';
-import { SignInFormData, SignUpFormData } from '@/types/auth';
+import { SignInFormData } from '@/types/auth';
 
 interface SignInFromProps {
     onContinue: () => void;
 }
 
 const SignInForm = ({ onContinue }: SignInFromProps) => {
+    const router = useRouter();
     const form = useForm<SignInFormData>();
 
     // STATES
@@ -23,19 +25,32 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
     const [ showHint, setShowHint ] = useState<boolean>(false);
 
     // MUTATIONS
-    const signUp = useMutation({
-        mutationFn: async (data: SignUpFormData) => await fetch('/api/auth/signup', {
-            body: JSON.stringify(data),
-            method: 'POST',
-        }),
+    const signIn = useMutation({
+        mutationFn: async (data: SignInFormData) => {
+            const response = await fetch('/api/auth/signin', {
+                body: JSON.stringify({
+                    nickname: data.nickname,
+                    password: data.password ? data.password.sort().join('') : '',
+                }),
+                method: 'POST',
+            });
+
+            const json = await response.json();
+
+            if (!response.ok) throw new Error(json.message);
+
+            return json;
+        },
     });
 
     // METHODS
-    const handleSubmit = async (data: SignUpFormData) => {
+    const handleSubmit = async (data: SignInFormData) => {
         try {
-            await signUp.mutateAsync(data);
+            await signIn.mutateAsync(data);
+
+            router.push('/shop');
         } catch (error: unknown) {
-            console.log(error);
+            alert(error);
         }
     };
 
@@ -84,7 +99,7 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
             <Controller
                 control={ form.control }
                 name='password'
-                render={ ({}) =>
+                render={ ({ field }) =>
                     <div className='flex flex-col gap-5'>
                         <div className='flex flex-col gap-0.5'>
                             <p className='font-bold text-sky-800'>
@@ -98,7 +113,10 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
                             }
                         </div>
 
-                        <CheckboxGroup className='grid gap-1 grid-cols-6'>
+                        <CheckboxGroup
+                            { ...field }
+                            className='grid gap-1 grid-cols-6'
+                        >
                             { Array.from({ length: 26 }, (_, i) => {
                                 const letter = String.fromCharCode(97 + i);
 

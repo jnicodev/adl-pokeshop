@@ -6,6 +6,15 @@ import { User } from '@/types/user';
 
 export async function POST(request: Request) {
     const { nickname }: User = await request.json();
+
+    if (!nickname || nickname.length < 3) {
+        return NextResponse.json({
+            message: 'Ingresa un usuario de al menos 3 letras',
+        }, {
+            status: 400,
+        });
+    }
+
     const user = await findUserByNickname(nickname);
 
     if (user) {
@@ -19,7 +28,7 @@ export async function POST(request: Request) {
     const newUser = {
         id: randomUUID(),
         nickname: nickname,
-        password: nickname.toLowerCase().slice(0, 3),
+        password: nickname.toLowerCase().slice(0, 3).split('').sort().join(''),
     };
 
     await createUser(newUser);

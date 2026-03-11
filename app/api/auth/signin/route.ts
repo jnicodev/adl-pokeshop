@@ -5,12 +5,12 @@ import { findUserByNickname } from '@/lib/users';
 import { User } from '@/types/user';
 
 export async function POST(request: Request) {
-    const { nickname }: User = await request.json();
+    const { nickname, password }: User = await request.json();
     const user = await findUserByNickname(nickname);
 
-    if (!user) {
+    if (!user || user.password !== password) {
         return NextResponse.json({
-            message: 'Usuario o clave incorrecta',
+            message: 'Usuario o clave Unown incorrecta',
         }, {
             status: 400,
         });

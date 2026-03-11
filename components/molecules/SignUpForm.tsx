@@ -21,10 +21,18 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
 
     // MUTATIONS
     const signUp = useMutation({
-        mutationFn: async (data: SignUpFormData) => await fetch('/api/auth/signup', {
-            body: JSON.stringify(data),
-            method: 'POST',
-        }),
+        mutationFn: async (data: SignUpFormData) => {
+            const response = await fetch('/api/auth/signup', {
+                body: JSON.stringify(data),
+                method: 'POST',
+            });
+
+            const json = await response.json();
+
+            if (!response.ok) throw new Error(json.message);
+
+            return json;
+        },
     });
 
     // METHODS
@@ -34,7 +42,7 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
 
             setReady(true);
         } catch (error: unknown) {
-            console.log(error);
+            alert(error);
         }
     };
 
