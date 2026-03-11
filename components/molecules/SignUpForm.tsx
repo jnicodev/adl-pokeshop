@@ -29,8 +29,6 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
 
     // METHODS
     const handleSubmit = async (data: SignUpFormData) => {
-        console.log(data);
-
         try {
             await signUp.mutateAsync(data);
 
@@ -69,8 +67,8 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
 
             { nickname &&
                 <div className='flex flex-col gap-2 mb-10'>
-                    <div className='font-bold text-red-600'>
-                        Clave:
+                    <div className='font-bold text-sky-800'>
+                        Recuerda tu clave:
                     </div>
 
                     <div className='font-unown text-9xl lowercase leading-14'>
@@ -81,13 +79,12 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
 
             { ready ?
                 <Button
-                    color='danger'
                     onPress={ handleContinue }
                 >
-                    Listo, recordaré mi clave
+                    Gracias, recordaré mi clave de Unowns
                 </Button>
                 :
-                <div className='flex flex-col gap-1.5'>
+                <div className='flex flex-col gap-1'>
                     <Button
                         color='ok'
                         type='submit'
@@ -95,10 +92,7 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
                         Registrarme
                     </Button>
 
-                    <Button
-                        color='danger'
-                        onPress={ handleContinue }
-                    >
+                    <Button onPress={ handleContinue }>
                         No entiendo...
                     </Button>
                 </div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
+import SignInForm from '@/components/molecules/SignInForm';
 import SignUpForm from '@/components/molecules/SignUpForm';
 import { INTRO_PHRASES, IntroPhraseKey } from '@/types/auth';
 
@@ -13,7 +14,11 @@ const Home = () => {
 
     // METHODS
     const handleSignUpContinue = () => {
-        setAction('Welcome');
+        setAction('Ask');
+    };
+
+    const handleSignInContinue = () => {
+        setAction('Ask');
     };
 
     return (
@@ -24,7 +29,7 @@ const Home = () => {
                 </h1>
 
                 { action === 'Welcome' &&
-                    <div className='flex flex-col gap-1.5'>
+                    <div className='flex flex-col gap-1'>
                         <Button
                             color='danger'
                             onPress={ () => setAction('Old') }
@@ -32,10 +37,7 @@ const Home = () => {
                             Sí, sé lo que necesito...
                         </Button>
 
-                        <Button
-                            color='ok'
-                            onPress={ () => setAction('New') }
-                        >
+                        <Button onPress={ () => setAction('New') }>
                             No, pero te he visto...
                         </Button>
 
@@ -49,26 +51,37 @@ const Home = () => {
                 }
 
                 { action === 'Ask' &&
-                    <div className='flex flex-col gap-1.5'>
-                        <Button
-                            color='ok'
-                            onPress={ () => setAction('Police') }
-                        >
-                            ¡Claro!
-                        </Button>
+                    <div className='flex flex-col gap-5'>
+                        <div className='w-10 h-10 relative self-center'>
+                            <Image
+                                alt='Pokeball'
+                                fill
+                                objectFit='contain'
+                                src='/pokeball.png'
+                            />
+                        </div>
 
-                        <Button
-                            color='danger'
-                            onPress={ () => setAction('New') }
-                        >
-                            No, solo &#34;productos&#34;...
-                        </Button>
+                        <div className='flex flex-col gap-1'>
+                            <Button
+                                color='ok'
+                                onPress={ () => setAction('Police') }
+                            >
+                                ¡Claro!
+                            </Button>
+
+                            <Button
+                                color='danger'
+                                onPress={ () => setAction('New') }
+                            >
+                                No, solo &#34;productos&#34;...
+                            </Button>
+                        </div>
                     </div>
                 }
 
                 { action === 'New' && <SignUpForm onContinue={ handleSignUpContinue } /> }
 
-                { action === 'Old' && <SignUpForm onContinue={ handleSignUpContinue } /> }
+                { action === 'Old' && <SignInForm onContinue={ handleSignInContinue } /> }
 
                 { action === 'Police' &&
                     <Button
