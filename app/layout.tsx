@@ -1,14 +1,20 @@
 import type { Metadata } from 'next';
 
-import { Inter } from 'next/font/google';
-
 import './globals.css';
+import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 
 const inter = Inter({
     subsets: [ 'latin' ],
     variable: '--font-inter',
     weight: '400',
+});
+
+const unown = localFont({
+    display: 'swap',
+    src: '../public/fonts/Unown.ttf',
+    variable: '--font-unown',
 });
 
 export const metadata: Metadata = {
@@ -19,7 +25,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode; }>) {
     return (
         <html lang='es'>
-            <body className={ `${ inter.variable } antialiased` }>
+            <body className={ `${ inter.variable } ${ unown.variable } antialiased bg-stone-200` }>
                 { children }
             </body>
         </html>
