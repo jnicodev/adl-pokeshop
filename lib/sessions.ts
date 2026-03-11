@@ -28,9 +28,9 @@ export const findSessionByToken = async (token: string) => {
     return sessions.find(session => session.token === token);
 };
 
-export const deleteSession = async (userId: string) => {
+export const deleteSessions = async (userId: string) => {
     const sessions = await getSessions();
-    const filtered = sessions.filter(session => session.userId === userId);
+    const filtered = sessions.filter(session => session.userId !== userId);
 
     await saveSessions(filtered);
 };

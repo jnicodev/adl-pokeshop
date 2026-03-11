@@ -13,7 +13,7 @@ export const getUsers = async (): Promise<User[]> => {
 
 export const createUser = async (user: User) => {
     const users = await getUsers();
-    
+
     users.push(user);
     await writeFile(file, JSON.stringify(users, null, 2));
 };
