@@ -1,10 +1,12 @@
 [
   {
-    "email": "im@pau.com",
-    "password": "123"
+    "id": "57723dec-d568-496e-9b6b-1da0b062f29a",
+    "nickname": "Jnico",
+    "password": "jni"
   },
   {
-    "email": "im@jnico.com",
-    "password": "123"
+    "id": "7e459527-a67b-48f5-9030-bdc6aaa2915f",
+    "nickname": "Jnifco",
+    "password": "jni"
   }
 ]
