@@ -3,14 +3,13 @@ import { randomUUID } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { createUser, getUsers, saveUsers } from '@/lib/users';
 import { User } from '@/types/user';
 
 export async function POST(request: Request) {
     const newUser: User = await request.json();
 
-    const file = path.join(process.cwd(), 'data/users.json');
-    const data = await readFile(file, 'utf-8');
-    const users: User[] = JSON.parse(data);
+    const users: User[] = await getUsers();
 
     const userExist = users.find(user => user.nickname === newUser.nickname);
 
@@ -28,9 +27,7 @@ export async function POST(request: Request) {
         password: newUser.nickname.toLowerCase().slice(0, 3),
     };
 
-    users.push(user);
-
-    await writeFile(file, JSON.stringify(users, null, 2));
+    await createUser(user);
 
     return NextResponse.json(user);
 }
