@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 
-import { createUser, findUser } from '@/lib/users';
+import { createUser, findUserByNickname } from '@/lib/users';
 import { User } from '@/types/user';
 
 export async function POST(request: Request) {
     const { nickname }: User = await request.json();
-    const user = await findUser(nickname);
+    const user = await findUserByNickname(nickname);
 
     if (user) {
         return NextResponse.json({

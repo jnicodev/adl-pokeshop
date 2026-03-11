@@ -13,12 +13,19 @@ export const getUsers = async (): Promise<User[]> => {
 
 export const createUser = async (user: User) => {
     const users = await getUsers();
+    
     users.push(user);
     await writeFile(file, JSON.stringify(users, null, 2));
 };
 
-export const findUser = async (nickname: string) => {
+export const findUserByNickname = async (nickname: string) => {
     const users = await getUsers();
 
     return users.find(user => user.nickname === nickname);
-}
+};
+
+export const findUserById = async (id: string) => {
+    const users = await getUsers();
+
+    return users.find(user => user.id === id);
+};
