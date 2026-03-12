@@ -1,23 +1,32 @@
-import { Pkmn } from "@/types/pkmn";
+import { PokeAPI } from 'pokeapi-types';
+
+import calculatePkmnPrice from '@/lib/calculatePkmnPrice';
+import { Pkmn } from '@/types/pkmn';
 
 export async function GET() {
     const response = await fetch(`${ process.env.NEXT_PUBLIC_POKEAPI_URL }/pokemon`);
-    const pokeapi = await response.json();
+    const pokeApi: PokeAPI.NamedAPIResourceList = await response.json();
 
     const pokemon: Pkmn[] = await Promise.all(
-        pokeapi.results.map(async ({ url }) => {
+        pokeApi.results.map(async ({ url }) => {
             const response = await fetch(url);
             const pkmn = await response.json();
 
+            const price = calculatePkmnPrice(pkmn.name, pkmn.base_experience, pkmn.weight);
+
             return {
                 name: pkmn.name,
-                sprite: pkmn.sprites.front_default,
+                price,
+                sprite: {
+                    back: pkmn.sprites.back_default,
+                    front: pkmn.sprites.front_default,
+                },
             };
         })
     );
 
     return Response.json({
-        ...pokeapi,
+        ...pokeApi,
         results: pokemon,
     });
 }
