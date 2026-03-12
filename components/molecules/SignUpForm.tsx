@@ -23,7 +23,7 @@ const SignUpForm = ({ onBack, onContinue }: SignUpFormProps) => {
     // MUTATIONS
     const signUp = useMutation({
         mutationFn: async (data: SignUpFormData) => {
-            const response = await fetch('/api/auth/signup', {
+            const response = await fetch('/api/auth/sign-up', {
                 body: JSON.stringify(data),
                 method: 'POST',
             });

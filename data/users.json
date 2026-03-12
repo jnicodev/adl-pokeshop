@@ -13,5 +13,15 @@
     "id": "26b9ab3a-0f0b-422f-bc5d-7e5b188f6eb9",
     "nickname": "Jnico",
     "password": "ijn"
+  },
+  {
+    "id": "1d373a51-19d2-4968-8035-97b0fe149ea1",
+    "nickname": "Hola",
+    "password": "hlo"
+  },
+  {
+    "id": "ac491a30-4ca6-443c-8458-96a373e7c05c",
+    "nickname": "Otro",
+    "password": "ort"
   }
 ]

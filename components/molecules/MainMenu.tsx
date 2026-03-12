@@ -12,7 +12,7 @@ const MainMenu = () => {
     // MUTATIONS
     const signOut = useMutation({
         mutationFn: async () => {
-            const response = await fetch('/api/auth/signout', {
+            const response = await fetch('/api/auth/sign-out', {
                 method: 'POST',
             });
             const json = await response.json();

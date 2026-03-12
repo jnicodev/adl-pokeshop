@@ -27,7 +27,7 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
     // MUTATIONS
     const signIn = useMutation({
         mutationFn: async (data: SignInFormData) => {
-            const response = await fetch('/api/auth/signin', {
+            const response = await fetch('/api/auth/sign-in', {
                 body: JSON.stringify({
                     nickname: data.nickname,
                     password: data.password ? data.password.sort().join('') : '',
