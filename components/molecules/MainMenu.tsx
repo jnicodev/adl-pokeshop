@@ -1,7 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { ShoppingBagIcon } from 'lucide-react';
+import { LogOutIcon, ShoppingBagIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -87,7 +87,7 @@ const MainMenu = () => {
             </Button>
 
             <Button onPress={ handleSignOut }>
-                Salir
+                <LogOutIcon />
             </Button>
         </nav>
     );

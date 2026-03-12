@@ -1,7 +1,7 @@
 import { tv, VariantProps } from 'tailwind-variants';
 
 export const buttonStyles = tv({
-    base: 'font-bold text-white text-left py-3 px-6 rounded cursor-pointer hover:border-stone-500 hover:to-stone-700',
+    base: 'font-bold text-white text-left py-3 px-6 rounded cursor-pointer hover:border-stone-500 hover:to-stone-800',
     defaultVariants: {
         color: 'neutral',
     },
@@ -9,7 +9,7 @@ export const buttonStyles = tv({
         color: {
             clear: '',
             danger: 'bg-linear-to-r from-rose-800 to-rose-500',
-            neutral: 'bg-linear-to-r from-emerald-500 to-cyan-500',
+            neutral: 'text-cyan-50 bg-linear-to-r from-emerald-600 to-stone-700',
             ok: 'bg-linear-to-r from-emerald-800 to-emerald-500',
         },
         size: {

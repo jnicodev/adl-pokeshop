@@ -18,7 +18,7 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
 
     return (
         <div className='flex flex-col gap-2.5 bg-neutral-800 p-3 border border-neutral-700'>
-            <div className='size-40 bg-linear-to-b from-red-800 from-48% via-neutral-900 to-stone-300 to-52% rounded-full border-4 border-stone-950 relative'>
+            <div className='size-40 bg-linear-to-b from-red-800 via-neutral-900 to-stone-300 rounded-full border-2 border-stone-900 relative'>
                 <Image
                     alt={ pkmn.name }
                     fill
