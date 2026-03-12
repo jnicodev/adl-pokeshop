@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 
-import { Cart, CartItem } from '@/types/cart';
+import { Cart, Item } from '@/types/cart';
 import { Pkmn } from '@/types/pkmn';
 
 export const CartContext = createContext<{
@@ -19,7 +19,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const addItem = (pkmn: Pkmn) => {
         setCart(prev => {
-            const item: CartItem = {
+            const item: Item = {
                 pkmn,
                 quantity: 1,
             };

@@ -10,11 +10,11 @@ import useCart from '@/hooks/useCart';
 import toCOP from '@/lib/toCOP';
 import { Pkmn } from '@/types/pkmn';
 
-interface PkmnCardProps {
+interface ItemCardProps {
     pkmn: Pkmn;
 }
 
-const PkmnCard = ({ pkmn }: PkmnCardProps) => {
+const ItemCard = ({ pkmn }: ItemCardProps) => {
     const { addItem } = useCart();
     const [ showBack, setShowBack ] = useState<boolean>(false);
 
@@ -71,4 +71,4 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
     );
 };
 
-export default PkmnCard;
+export default ItemCard;

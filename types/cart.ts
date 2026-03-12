@@ -1,11 +1,11 @@
 import { Pkmn } from '@/types/pkmn';
 
 export type Cart = {
-    items: CartItem[],
+    items: Item[],
     total: number;
 };
 
-export type CartItem = {
+export type Item = {
     pkmn: Pkmn,
     quantity: number;
 };

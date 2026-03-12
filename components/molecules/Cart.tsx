@@ -5,7 +5,7 @@ import { Dialog, Modal, ModalOverlay, ModalOverlayProps as RACModalOverlayProps 
 
 import Button from '@/components/atoms/Button/Button';
 import PokedollarIcon from '@/components/atoms/PokedollarIcon';
-import CartItemCard from '@/components/molecules/CartItemCard';
+import ItemCardMini from '@/components/molecules/ItemCardMini';
 import CartSection from '@/components/molecules/CartSection';
 import useCart from '@/hooks/useCart';
 import toCOP from '@/lib/toCOP';
@@ -37,7 +37,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
 
                             <div className='max-h-[calc(var(--visual-viewport-height)*.65)] grid gap-2 overflow-y-auto'>
                                 { cart.items.map((item, i) =>
-                                    <CartItemCard
+                                    <ItemCardMini
                                         item={ item }
                                         key={ i }
                                     />

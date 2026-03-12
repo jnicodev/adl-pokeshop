@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import CartSection from '@/components/molecules/CartSection';
-import PkmnCard from '@/components/molecules/PkmnCard';
+import ItemCard from '@/components/molecules/ItemCard';
 import { PkmnIndex } from '@/types/api';
 
 const ShopHome = () => {
@@ -27,7 +27,7 @@ const ShopHome = () => {
         <CartSection>
             <div className='grid gap-5 p-5'>
                 { pkmnIndex?.results?.map(pkmn =>
-                    <PkmnCard
+                    <ItemCard
                         key={ pkmn.name }
                         pkmn={ pkmn }
                     />

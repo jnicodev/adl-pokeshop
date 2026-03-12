@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 
-import { CartItem } from '@/types/cart';
+import { Item } from '@/types/cart';
 
 interface CartItemProps {
-    item: CartItem;
+    item: Item;
 }
 
-const CartItemCard = ({ item }: CartItemProps) => {
+const ItemCardMini = ({ item }: CartItemProps) => {
     return (
         <div className='bg-neutral-800'>
             <div className='flex items-center'>
@@ -38,4 +38,4 @@ const CartItemCard = ({ item }: CartItemProps) => {
     );
 };
 
-export default CartItemCard;
+export default ItemCardMini;
