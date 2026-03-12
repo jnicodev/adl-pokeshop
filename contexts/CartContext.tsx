@@ -6,6 +6,8 @@ import { Pkmn } from '@/types/pkmn';
 export const CartContext = createContext<{
     addItem: (pkmn: Pkmn) => void;
     cart: Cart;
+    isOpen: boolean;
+    show: (value: boolean) => void;
 } | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -13,6 +15,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         items: [],
         total: 0,
     });
+    const [ isOpen, setIsOpen ] = useState<boolean>(false);
 
     const addItem = (pkmn: Pkmn) => {
         setCart(prev => {
@@ -35,6 +38,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         });
     };
 
+    const show = (value: boolean) => {
+        setIsOpen(value);
+    };
+
     useEffect(() => {
         const localCart = localStorage.getItem('cart');
 
@@ -51,6 +58,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             value={ {
                 addItem,
                 cart,
+                isOpen,
+                show,
             } }
         >
             { children }

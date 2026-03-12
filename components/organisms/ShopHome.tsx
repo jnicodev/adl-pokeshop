@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 
+import CartSection from '@/components/molecules/CartSection';
 import PkmnCard from '@/components/molecules/PkmnCard';
 import { PkmnIndex } from '@/types/api';
 
@@ -23,14 +24,16 @@ const ShopHome = () => {
     });
 
     return (
-        <div className='grid gap-5 bg-neutral-900 p-5 border-6 border-rose-800'>
-            { pkmnIndex?.results?.map(pkmn =>
-                <PkmnCard
-                    key={ pkmn.name }
-                    pkmn={ pkmn }
-                />
-            ) }
-        </div>
+        <CartSection>
+            <div className='grid gap-5 p-5'>
+                { pkmnIndex?.results?.map(pkmn =>
+                    <PkmnCard
+                        key={ pkmn.name }
+                        pkmn={ pkmn }
+                    />
+                ) }
+            </div>
+        </CartSection>
     );
 };
 

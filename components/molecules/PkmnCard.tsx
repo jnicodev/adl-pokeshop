@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
 import useCart from '@/hooks/useCart';
+import toCOP from '@/lib/toCOP';
 import { Pkmn } from '@/types/pkmn';
 
 interface PkmnCardProps {
@@ -17,7 +18,7 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
     const [ showBack, setShowBack ] = useState<boolean>(false);
 
     return (
-        <div className='flex flex-col gap-2.5 bg-neutral-800 p-3 border border-neutral-700'>
+        <div className='flex flex-col gap-2.5 bg-neutral-800 p-3 rounded'>
             <div className='size-40 bg-linear-to-b from-red-800 via-neutral-900 to-stone-300 rounded-full border-2 border-stone-900 relative'>
                 <Image
                     alt={ pkmn.name }
@@ -27,7 +28,7 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
                 />
 
                 <Button
-                    className='text-stone-400 bg-stone-700 absolute hover:text-white'
+                    className='text-neutral-500 bg-neutral-800 absolute hover:text-white'
                     color='clear'
                     onPress={ () => setShowBack(prev => !prev) }
                     size='xs'
@@ -41,8 +42,8 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
                     { pkmn.name }
                 </h4>
 
-                <span className='text-yellow-500 flex gap-2 items-center'>
-                    { pkmn.price }
+                <span className='font-semibold text-2xl text-yellow-500 flex gap-2 items-center'>
+                    { toCOP(pkmn.price) }
 
                     <div className='w-2.5'>
                         <svg
@@ -61,10 +62,19 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
                 </span>
 
                 <Button
-                    className='mt-3'
+                    className='flex gap-2 items-center mt-3'
                     onPress={ () => addItem(pkmn) }
                 >
-                    Añadir
+                    <Image
+                        alt='Pokeball'
+                        height={ 15 }
+                        src='/pokeball.png'
+                        width={ 15 }
+                    />
+
+                    <span>
+                        Añadir a la bolsa
+                    </span>
                 </Button>
             </div>
         </div>
