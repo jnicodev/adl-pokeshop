@@ -1,88 +1,93 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { Cart, Item } from '@/types/cart';
 import { Pkmn } from '@/types/pkmn';
 
-export const CartContext = createContext<{
+type CartContextValue = {
     addItem: (pkmn: Pkmn) => void;
-    cart: Cart;
+    deleteItem: (pkmn: Pkmn) => void;
     isOpen: boolean;
+    items: Item[];
     show: (value: boolean) => void;
-} | undefined>(undefined);
+    total: number;
+};
+
+export const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [ cart, setCart ] = useState<Cart>({
-        items: [],
-        total: 0,
-    });
-    const [ isOpen, setIsOpen ] = useState<boolean>(false);
+    // STATES
+    const [ items, setItems ] = useState<Item[]>([]);
+    const [ isOpen, setIsOpen ] = useState(false);
 
-    const addItem = (pkmn: Pkmn) => {
-        setCart(prev => {
-            const item: Item = {
-                pkmn,
-                quantity: 1,
-            };
+    const total = useMemo(() => {
+        return items.reduce((sum, item) => {
+            return sum + item.pkmn.price * item.quantity;
+        }, 0);
+    }, [ items ]);
 
-            const updated = {
-                ...prev,
-                items: [
-                    ...prev.items,
-                    item
-                ],
-            };
-
-            save(updated);
-
-            return updated;
-        });
-
-        calculateTotal();
-    };
-
+    // METHODS
     const show = (value: boolean) => {
         setIsOpen(value);
     };
 
-    const calculateTotal = () => {
-        setCart(prev => {
-            const total = prev.items.reduce((accumulate, item) => {
-                return accumulate + (item.pkmn.price * item.quantity);
-            }, 0);
+    const addItem = (pkmn: Pkmn) => {
+        setItems(prev => {
+            const exist = prev.find(item => item.pkmn.name === pkmn.name);
 
-            const updated = {
-                ...prev,
-                total,
-            };
+            if (exist) {
+                return prev.map(item => {
+                    if (item.pkmn.name === pkmn.name) {
+                        return { ...item, quantity: item.quantity + 1 };
+                    }
 
-            save(updated);
+                    return item;
+                });
+            }
 
-            return updated;
+            return [ ...prev, { pkmn, quantity: 1 } ];
         });
     };
 
-    const save = (updatedCart: Cart) => {
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
+    const deleteItem = (pkmn: Pkmn) => {
+        setItems(prev => {
+            return prev
+                .map( item => {
+                    if (item.pkmn.name === pkmn.name) {
+                        return { ...item, quantity: item.quantity - 1 };
+                    }
+
+                    return item;
+                })
+                .filter(item => item.quantity > 0);
+        }
+        );
     };
 
+    // EFFECTS
+    // Carga los Items del carrito desde el localStorage
     useEffect(() => {
-        const localCart = localStorage.getItem('cart');
+        const stored = localStorage.getItem('cart');
 
-        if (localCart) {
-            setCart(JSON.parse(localCart));
-            return;
+        if (stored) {
+            const cart: Cart = JSON.parse(stored);
+            setItems(cart.items);
         }
-
-        save(cart);
     }, []);
+
+    // Actualiza el carrito en el localStorage
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify({ items, total }));
+    }, [ items, total ]);
 
     return (
         <CartContext.Provider
             value={ {
                 addItem,
-                cart,
+                deleteItem,
                 isOpen,
+                items,
                 show,
+                total,
             } }
         >
             { children }

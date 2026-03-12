@@ -7,14 +7,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/atoms/Button/Button';
-import PokedollarIcon from '@/components/atoms/PokedollarIcon';
 import CartSection from '@/components/molecules/CartSection';
 import useCart from '@/hooks/useCart';
-import toCOP from '@/lib/toCOP';
 
 const MainMenu = () => {
     const router = useRouter();
-    const { cart, show } = useCart();
+    const cart = useCart();
 
     // MUTATIONS
     const signOut = useMutation({
@@ -61,7 +59,7 @@ const MainMenu = () => {
 
                 <Button
                     className='relative'
-                    onPress={ () => show(true) }
+                    onPress={ () => cart.show(true) }
                 >
                     <Image
                         alt='Cart'

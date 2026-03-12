@@ -5,20 +5,20 @@ import { Dialog, Modal, ModalOverlay, ModalOverlayProps as RACModalOverlayProps 
 
 import Button from '@/components/atoms/Button/Button';
 import PokedollarIcon from '@/components/atoms/PokedollarIcon';
-import ItemCardMini from '@/components/molecules/ItemCardMini';
 import CartSection from '@/components/molecules/CartSection';
+import ItemCardMini from '@/components/molecules/ItemCardMini';
 import useCart from '@/hooks/useCart';
 import toCOP from '@/lib/toCOP';
 
 const Cart = ({ ...props }: RACModalOverlayProps) => {
-    const { cart, isOpen, show } = useCart();
+    const cart = useCart();
 
     return (
         <ModalOverlay
             className='w-full h-screen bg-linear-to-b from-rose-950/60 to-neutral-950/60 backdrop-blur-sm p-3 absolute top-0 left-0'
             isDismissable
-            isOpen={ isOpen }
-            onOpenChange={ value => show(value) }
+            isOpen={ cart.isOpen }
+            onOpenChange={ value => cart.show(value) }
             { ...props }
         >
             <div className='w-full flex items-center justify-center sticky top-0 left-0'>
@@ -30,7 +30,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                         <Dialog className='flex flex-col gap-5'>
                             <Button
                                 className='self-start'
-                                onPress={ () => show(false) }
+                                onPress={ () => cart.show(false) }
                             >
                                 <XIcon />
                             </Button>

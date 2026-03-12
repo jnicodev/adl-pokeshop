@@ -15,7 +15,7 @@ interface ItemCardProps {
 }
 
 const ItemCard = ({ pkmn }: ItemCardProps) => {
-    const { addItem } = useCart();
+    const cart = useCart();
     const [ showBack, setShowBack ] = useState<boolean>(false);
 
     return (
@@ -53,7 +53,7 @@ const ItemCard = ({ pkmn }: ItemCardProps) => {
 
                 <Button
                     className='flex gap-2 items-center mt-3'
-                    onPress={ () => addItem(pkmn) }
+                    onPress={ () => cart.addItem(pkmn) }
                 >
                     <Image
                         alt='Pokeball'

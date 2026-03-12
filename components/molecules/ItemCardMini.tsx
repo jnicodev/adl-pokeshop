@@ -1,7 +1,10 @@
 'use client';
 
+import { TrashIcon } from 'lucide-react';
 import Image from 'next/image';
 
+import Button from '@/components/atoms/Button/Button';
+import useCart from '@/hooks/useCart';
 import { Item } from '@/types/cart';
 
 interface CartItemProps {
@@ -9,6 +12,8 @@ interface CartItemProps {
 }
 
 const ItemCardMini = ({ item }: CartItemProps) => {
+    const cart = useCart();
+
     return (
         <div className='bg-neutral-800'>
             <div className='flex items-center'>
@@ -33,6 +38,17 @@ const ItemCardMini = ({ item }: CartItemProps) => {
                         { item.pkmn.name }
                     </h5>
                 </div>
+
+                <span className='text-white ml-5'>
+                    { item.quantity }
+                </span>
+
+                <Button
+                    color='clear'
+                    onPress={ () => cart.deleteItem(item.pkmn) }
+                >
+                    <TrashIcon />
+                </Button>
             </div>
         </div>
     );
