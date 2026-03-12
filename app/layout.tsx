@@ -10,7 +10,7 @@ import Providers from '@/app/providers';
 const inter = Inter({
     subsets: [ 'latin' ],
     variable: '--font-inter',
-    weight: '400',
+    weight: [ '400', '500', '600' ],
 });
 
 const unown = localFont({

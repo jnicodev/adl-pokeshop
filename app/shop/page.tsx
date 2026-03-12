@@ -1,8 +1,8 @@
+import ShopHome from '@/components/organisms/ShopHome';
+
 const ShopPage = () => {
     return (
-        <div className='text-4xl'>
-            Ahí va la cosa :)
-        </div>
+        <ShopHome />
     );
 };
 

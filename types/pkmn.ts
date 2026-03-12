@@ -1,4 +1,8 @@
 export type Pkmn = {
-    name: string,
-    sprite: string,
+    name: string;
+    price: number;
+    sprite: {
+        back: string;
+        front: string;
+    };
 };
