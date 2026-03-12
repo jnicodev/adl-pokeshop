@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "5eb22a80-8093-4ff4-9933-2ac64a3bbcd6",
+    "nickname": "Pau",
+    "password": "apu"
+  },
+  {
+    "id": "7308c125-03e0-41a5-9c72-46cc91494fa9",
+    "nickname": "pau",
+    "password": "apu"
+  },
+  {
+    "id": "26b9ab3a-0f0b-422f-bc5d-7e5b188f6eb9",
+    "nickname": "Jnico",
+    "password": "ijn"
+  }
+]

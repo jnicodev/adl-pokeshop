@@ -54,10 +54,6 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
         }
     };
 
-    const handleContinue = () => {
-        onContinue();
-    };
-
     // EFFECTS
     useEffect(() => {
         const hintTimer = setTimeout(() => {
@@ -115,14 +111,14 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
 
                         <CheckboxGroup
                             { ...field }
-                            className='grid gap-1 grid-cols-6'
+                            className='grid gap-2 grid-cols-4'
                         >
                             { Array.from({ length: 26 }, (_, i) => {
                                 const letter = String.fromCharCode(97 + i);
 
                                 return (
                                     <Checkbox
-                                        className='flex flex-col'
+                                        className='flex flex-col relative'
                                         key={ i }
                                         value={ letter }
                                     >
@@ -131,7 +127,7 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
                                         </span>
 
                                         { showAbc &&
-                                            <span className='font-bold text-amber-600 mb-1'>
+                                            <span className='font-bold text-amber-600 mb-1 absolute top-2 left-3'>
                                                 { letter.toUpperCase() }
                                             </span>
                                         }
@@ -151,7 +147,7 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
                     Ingresar
                 </Button>
 
-                <Button onPress={ handleContinue }>
+                <Button onPress={ onContinue }>
                     Creo que no te conozco...
                 </Button>
             </div>

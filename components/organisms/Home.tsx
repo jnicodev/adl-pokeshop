@@ -12,18 +12,9 @@ const Home = () => {
     // STATES
     const [ action, setAction ] = useState<IntroPhraseKey>('Welcome');
 
-    // METHODS
-    const handleSignUpContinue = () => {
-        setAction('Ask');
-    };
-
-    const handleSignInContinue = () => {
-        setAction('Ask');
-    };
-
     return (
         <div className='flex flex-col gap-7 items-center p-3'>
-            <div className='w-full text-center flex flex-col gap-10 py-10 px-5 bg-stone-100 border-8 border-stone-400 rounded-3xl shadow-xl'>
+            <div className='w-full max-w-xl text-center flex flex-col gap-10 py-10 px-5 bg-stone-100 border-8 border-stone-400 rounded-3xl shadow-xl'>
                 <h1 className='font-bold text-3xl'>
                     { INTRO_PHRASES[action] }
                 </h1>
@@ -79,9 +70,14 @@ const Home = () => {
                     </div>
                 }
 
-                { action === 'New' && <SignUpForm onContinue={ handleSignUpContinue } /> }
+                { action === 'New' &&
+                    <SignUpForm
+                        onBack={ () => setAction('Ask') }
+                        onContinue={ () => setAction('Old') }
+                    />
+                }
 
-                { action === 'Old' && <SignInForm onContinue={ handleSignInContinue } /> }
+                { action === 'Old' && <SignInForm onContinue={ () => setAction('Welcome') } /> }
 
                 { action === 'Police' &&
                     <Button

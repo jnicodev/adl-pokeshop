@@ -9,10 +9,11 @@ import Input from '@/components/atoms/Input/Input';
 import { SignUpFormData } from '@/types/auth';
 
 interface SignUpFormProps {
+    onBack: () => void;
     onContinue: () => void;
 }
 
-const SignUpForm = ({ onContinue }: SignUpFormProps) => {
+const SignUpForm = ({ onBack, onContinue }: SignUpFormProps) => {
     const form = useForm<SignUpFormData>();
 
     // STATES
@@ -44,10 +45,6 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
         } catch (error: unknown) {
             alert(error);
         }
-    };
-
-    const handleContinue = () => {
-        onContinue();
     };
 
     return (
@@ -86,9 +83,7 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
             }
 
             { ready ?
-                <Button
-                    onPress={ handleContinue }
-                >
+                <Button onPress={ onContinue }>
                     Gracias, recordaré mi clave de Unowns
                 </Button>
                 :
@@ -100,7 +95,7 @@ const SignUpForm = ({ onContinue }: SignUpFormProps) => {
                         Registrarme
                     </Button>
 
-                    <Button onPress={ handleContinue }>
+                    <Button onPress={ onBack }>
                         No entiendo...
                     </Button>
                 </div>
