@@ -32,14 +32,37 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 ],
             };
 
-            localStorage.setItem('cart', JSON.stringify(updated));
+            save(updated);
+
+            return updated;
+        });
+
+        calculateTotal();
+    };
+
+    const show = (value: boolean) => {
+        setIsOpen(value);
+    };
+
+    const calculateTotal = () => {
+        setCart(prev => {
+            const total = prev.items.reduce((accumulate, item) => {
+                return accumulate + (item.pkmn.price * item.quantity);
+            }, 0);
+
+            const updated = {
+                ...prev,
+                total,
+            };
+
+            save(updated);
 
             return updated;
         });
     };
 
-    const show = (value: boolean) => {
-        setIsOpen(value);
+    const save = (updatedCart: Cart) => {
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
     };
 
     useEffect(() => {
@@ -50,7 +73,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             return;
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
+        save(cart);
     }, []);
 
     return (
