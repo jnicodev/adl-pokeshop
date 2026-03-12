@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
+import useCart from '@/hooks/useCart';
 import { Pkmn } from '@/types/pkmn';
 
 interface PkmnCardProps {
@@ -12,6 +13,7 @@ interface PkmnCardProps {
 }
 
 const PkmnCard = ({ pkmn }: PkmnCardProps) => {
+    const { addItem } = useCart();
     const [ showBack, setShowBack ] = useState<boolean>(false);
 
     return (
@@ -58,7 +60,10 @@ const PkmnCard = ({ pkmn }: PkmnCardProps) => {
                     </div>
                 </span>
 
-                <Button className='mt-3'>
+                <Button
+                    className='mt-3'
+                    onPress={ () => addItem(pkmn) }
+                >
                     Añadir
                 </Button>
             </div>

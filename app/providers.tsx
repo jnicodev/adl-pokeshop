@@ -3,6 +3,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
+import { CartProvider } from '@/contexts/CartContext';
+
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -18,7 +20,9 @@ interface ProvidersProps {
 const Providers = ({ children }: ProvidersProps) => {
     return (
         <QueryClientProvider client={ queryClient }>
-            { children }
+            <CartProvider>
+                { children }
+            </CartProvider>
         </QueryClientProvider>
     );
 };

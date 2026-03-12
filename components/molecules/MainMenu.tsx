@@ -1,13 +1,16 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
+import { ShoppingBagIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/atoms/Button/Button';
+import useCart from '@/hooks/useCart';
 
 const MainMenu = () => {
     const router = useRouter();
+    const { cart } = useCart();
 
     // MUTATIONS
     const signOut = useMutation({
@@ -67,6 +70,21 @@ const MainMenu = () => {
                     </svg>
                 </div>
             </div>
+
+            <Button
+                className='relative'
+                onPress={ () => console.log(cart) }
+            >
+                <ShoppingBagIcon />
+
+                <span className='text-xs leading-1.5 bg-yellow-600 p-2 rounded-full absolute -top-2 -right-2'>
+                    { cart.items.length }
+                </span>
+            </Button>
+
+            <Button onPress={ () => localStorage.removeItem('cart') }>
+                L
+            </Button>
 
             <Button onPress={ handleSignOut }>
                 Salir
