@@ -9,10 +9,10 @@ interface ButtonProps extends ButtonVariants, RACButtonProps {
 
 }
 
-const Button = ({ children, className, color, ...props }: ButtonProps) => {
+const Button = ({ children, className, color, size, ...props }: ButtonProps) => {
     return (
         <RACButton
-            className={ cn(buttonStyles({ color }), className) }
+            className={ cn(buttonStyles({ color, size }), className) }
             { ...props }
         >
             { children }
