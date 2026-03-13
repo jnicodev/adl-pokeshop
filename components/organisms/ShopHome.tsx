@@ -8,7 +8,7 @@ import { PkmnIndex } from '@/types/api';
 
 const ShopHome = () => {
     // QUERIES
-    const { data: pkmnIndex } = useQuery({
+    const { data: pkmnIndex, isError, isLoading } = useQuery({
         queryFn: async (): Promise<PkmnIndex> => {
             const response = await fetch('/api/pkmn', {
                 method: 'GET',
@@ -22,6 +22,22 @@ const ShopHome = () => {
         },
         queryKey: [ 'pkmn' ],
     });
+
+    if (isLoading) {
+        return (
+            <div className='p-6 text-center text-yellow-500'>
+                Cargando...
+            </div>
+        );
+    }
+
+    if (isError || !pkmnIndex) {
+        return (
+            <div className='p-6 text-center text-red-500'>
+                Error al cargar los Pokémon
+            </div>
+        );
+    }
 
     return (
         <CartSection>
