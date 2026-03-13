@@ -25,7 +25,7 @@ const ShopHome = () => {
 
     return (
         <CartSection>
-            <div className='grid gap-5 p-5'>
+            <div className='grid gap-5 p-5 sm:grid-cols-2 lg:grid-cols-3'>
                 { pkmnIndex?.results?.map(pkmn =>
                     <ItemCard
                         key={ pkmn.name }

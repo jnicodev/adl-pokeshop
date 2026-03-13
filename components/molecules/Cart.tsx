@@ -1,6 +1,7 @@
 'use client';
 
 import { XIcon } from 'lucide-react';
+import Image from 'next/image';
 import { Dialog, Modal, ModalOverlay, ModalOverlayProps as RACModalOverlayProps } from 'react-aria-components';
 
 import Button from '@/components/atoms/Button/Button';
@@ -28,12 +29,46 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                         { ...props }
                     >
                         <Dialog className='flex flex-col gap-5'>
-                            <Button
-                                className='self-start'
-                                onPress={ () => cart.show(false) }
-                            >
-                                <XIcon />
-                            </Button>
+                            <div className='flex items-center justify-between'>
+                                <Button
+                                    className='self-start'
+                                    onPress={ () => cart.show(false) }
+                                >
+                                    <XIcon />
+                                </Button>
+
+                                { cart.total.items > 0 &&
+                                    <Button
+                                        className='self-start'
+                                        color='danger'
+                                        onPress={ cart.empty }
+                                    >
+                                        Vacíar bolsa Pokémon
+                                    </Button>
+                                }
+                            </div>
+
+                            { cart.total.items === 0 &&
+                                <div className='flex flex-col gap-5 items-center'>
+                                    <span className='font-bold text-xl text-olive-500'>
+                                        Tu bolsa de Pokémon está vacía. Añade algunos Pokémon
+                                        { ' ' }
+
+                                        <span className='line-through'>
+                                            robados
+                                        </span>
+                                        .
+                                    </span>
+
+                                    <div className='size-100 relative'>
+                                        <Image
+                                            alt='Team Rocket'
+                                            fill
+                                            src='/team_rocket_duo.png'
+                                        />
+                                    </div>
+                                </div>
+                            }
 
                             <div className='max-h-[calc(var(--visual-viewport-height)*.65)] grid gap-2 overflow-y-auto'>
                                 { cart.items.map((item, i) =>
@@ -58,9 +93,11 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                 </span>
                             </div>
 
-                            <Button className='self-center'>
-                                Finalizar compra
-                            </Button>
+                            { cart.total.items > 0 &&
+                                <Button className='self-center'>
+                                    Finalizar compra
+                                </Button>
+                            }
                         </Dialog>
                     </Modal>
                 </CartSection>

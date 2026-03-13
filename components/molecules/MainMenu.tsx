@@ -59,6 +59,7 @@ const MainMenu = () => {
 
                 <Button
                     className='relative'
+                    color='danger'
                     onPress={ () => cart.show(true) }
                 >
                     <Image
@@ -71,10 +72,6 @@ const MainMenu = () => {
                     <span className='text-xs leading-1.5 bg-mauve-500 p-2 border border-mauve-400 rounded-full absolute -top-2 -right-2'>
                         { cart.total.items }
                     </span>
-                </Button>
-
-                <Button onPress={ () => localStorage.removeItem('cart') }>
-                    L
                 </Button>
 
                 <Button

@@ -6,13 +6,14 @@ import { Pkmn } from '@/types/pkmn';
 type CartContextValue = {
     addItem: (pkmn: Pkmn) => void;
     deleteItem: (pkmn: Pkmn) => void;
+    empty: () => void;
     isOpen: boolean;
     items: Item[];
     show: (value: boolean) => void;
     total: {
         items: number;
         pokedollars: number;
-    }
+    },
 };
 
 export const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -72,6 +73,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         );
     };
 
+    const empty = () => {
+        localStorage.removeItem('cart');
+        setItems([]);
+    };
+
     // EFFECTS
     // Carga los Items del carrito desde el localStorage
     useEffect(() => {
@@ -93,6 +99,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
             value={ {
                 addItem,
                 deleteItem,
+                empty,
                 isOpen,
                 items,
                 show,
