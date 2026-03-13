@@ -6,8 +6,10 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
-import CartSection from '@/components/molecules/CartSection';
-import ItemCard from '@/components/molecules/ItemCard';
+import ErrorMessage from '@/components/atoms/ErrorMessage/ErrorMessage';
+import Loading from '@/components/atoms/Loading/Loading';
+import ItemCard from '@/components/molecules/ItemCard/ItemCard';
+import RocketSection from '@/components/atoms/RocketSection/RocketSection';
 import { PkmnIndex } from '@/types/api';
 
 const ShopHome = () => {
@@ -28,39 +30,27 @@ const ShopHome = () => {
         queryKey: [ 'pkmn', offset ],
     });
 
-    if (isLoading) {
-        return (
-            <div className='p-6 text-center text-yellow-500'>
-                Cargando...
-            </div>
-        );
-    }
+    if (isLoading) return <Loading />;
 
-    if (isError || !pkmnIndex) {
-        return (
-            <div className='p-6 text-center text-red-500'>
-                Error al cargar los Pokémon
-            </div>
-        );
-    }
+    if (isError || !pkmnIndex) return <ErrorMessage />;
 
     return (
-        <CartSection>
+        <RocketSection>
             <div className='flex flex-col gap-4 p-5'>
                 <div className='flex gap-5 items-center ml-5'>
                     <Image
                         alt='Pokeball'
-                        height={ 50 }
+                        height={ 40 }
                         src='/pokeball.png'
-                        width={ 50 }
+                        width={ 40 }
                     />
 
                     <div className='flex flex-col'>
-                        <h2 className='font-semibold text-4xl text-mauve-300'>
+                        <h2 className='font-semibold text-2xl text-mauve-300 lg:text-4xl'>
                             Pokémon a la venta
                         </h2>
 
-                        <p className='text-lg text-neutral-600 line-through'>
+                        <p className='text-neutral-600 line-through lg:text-lg'>
                             Están de espalda porque no podemos correr el riesgo de que reconozcan a sus dueños
                         </p>
                     </div>
@@ -78,7 +68,7 @@ const ShopHome = () => {
                 <div className='flex gap-5 justify-center'>
                     { offset > 0 &&
                         <Button
-                            color='danger'
+                            color='support'
                             onPress={ () => setOffset(prev => Math.max(prev - 24, 0)) }
                         >
                             <ArrowBigLeftIcon />
@@ -86,14 +76,14 @@ const ShopHome = () => {
                     }
 
                     <Button
-                        color='danger'
+                        color='support'
                         onPress={ () => setOffset(prev => prev + 24) }
                     >
                         <ArrowBigRightIcon />
                     </Button>
                 </div>
             </div>
-        </CartSection>
+        </RocketSection>
     );
 };
 

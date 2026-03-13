@@ -6,7 +6,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import Button from '@/components/atoms/Button/Button';
 import Input from '@/components/atoms/Input/Input';
-import CartSection from '@/components/molecules/CartSection';
+import RocketSection from '@/components/atoms/RocketSection/RocketSection';
 import { SearchFormData } from '@/types/search';
 
 const SearchForm = () => {
@@ -18,7 +18,7 @@ const SearchForm = () => {
     };
 
     return (
-        <CartSection>
+        <RocketSection>
             <form
                 className=' flex gap-3 p-5'
                 onSubmit={ form.handleSubmit(handleSubmit) }
@@ -39,7 +39,7 @@ const SearchForm = () => {
                     <SearchIcon />
                 </Button>
             </form>
-        </CartSection>
+        </RocketSection>
     );
 };
 

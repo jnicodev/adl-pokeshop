@@ -4,7 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
 import Button from '@/components/atoms/Button/Button';
-import CartSection from '@/components/molecules/CartSection';
+import ErrorMessage from '@/components/atoms/ErrorMessage/ErrorMessage';
+import Loading from '@/components/atoms/Loading/Loading';
+import RocketSection from '@/components/atoms/RocketSection/RocketSection';
 import useCart from '@/hooks/useCart';
 import { PokeApiPokemon } from '@/types/api';
 
@@ -25,21 +27,9 @@ const Pkmn = ({ name }: PkmnProps) => {
         queryKey: [ 'pkmn', name ],
     });
 
-    if (isLoading) {
-        return (
-            <div className='p-6 text-center text-yellow-500'>
-                Cargando...
-            </div>
-        );
-    }
+    if (isLoading) return <Loading />;
 
-    if (isError || !creature) {
-        return (
-            <div className='p-6 text-center text-red-500'>
-                Error al cargar el Pokémon
-            </div>
-        );
-    }
+    if (isError || !creature) return <ErrorMessage />;
 
     if (creature.message) {
         return (
@@ -60,7 +50,7 @@ const Pkmn = ({ name }: PkmnProps) => {
     }
 
     return (
-        <CartSection className='bg-neutral-900'>
+        <RocketSection className='bg-neutral-900'>
             <div className='flex flex-col items-center p-10'>
                 <Image
                     alt={ creature.pokeApi.name }
@@ -160,7 +150,7 @@ const Pkmn = ({ name }: PkmnProps) => {
                     </div>
                 </div>
             </div>
-        </CartSection>
+        </RocketSection>
     );
 };
 

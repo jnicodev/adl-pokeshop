@@ -6,9 +6,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
-import PokedollarIcon from '@/components/atoms/PokedollarIcon';
+import Pokedollars from '@/components/atoms/Pokedollars/Pokedollars';
 import useCart from '@/hooks/useCart';
-import toCOP from '@/lib/toCOP';
 import { Pkmn } from '@/types/pkmn';
 
 interface ItemCardProps {
@@ -20,10 +19,10 @@ const ItemCard = ({ pkmn }: ItemCardProps) => {
     const [ turn, setTurn ] = useState<boolean>(false);
 
     return (
-        <div className='flex flex-col gap-2.5 bg-neutral-800 p-3 rounded'>
-            <div className='relative'>
+        <div className='flex gap-2.5 flex-col items-start bg-neutral-800 p-3 rounded'>
+            <div className='w-full relative'>
                 <Link
-                    className='group relative'
+                    className='group'
                     href={ `/shop/pkmn/${ pkmn.name }` }
                 >
                     <div className='w-full h-40 flex items-center justify-center bg-linear-to-b from-red-800/40 via-neutral-900/50 to-stone-300/30 relative mx-auto transition-all group-hover:w-40 group-hover:rounded-full'>
@@ -52,30 +51,24 @@ const ItemCard = ({ pkmn }: ItemCardProps) => {
                     { pkmn.name }
                 </h4>
 
-                <span className='font-semibold text-2xl text-yellow-500 flex gap-2 items-center'>
-                    { toCOP(pkmn.price) }
-
-                    <div className='w-2.5'>
-                        <PokedollarIcon />
-                    </div>
-                </span>
-
-                <Button
-                    className='flex gap-2 items-center mt-3'
-                    onPress={ () => cart.addItem(pkmn) }
-                >
-                    <Image
-                        alt='Pokeball'
-                        height={ 15 }
-                        src='/pokeball.png'
-                        width={ 15 }
-                    />
-
-                    <span>
-                        Añadir a la bolsa
-                    </span>
-                </Button>
+                <Pokedollars value={ pkmn.price } />
             </div>
+
+            <Button
+                className='flex gap-2 items-center'
+                onPress={ () => cart.addItem(pkmn) }
+            >
+                <Image
+                    alt='Pokeball'
+                    height={ 15 }
+                    src='/pokeball.png'
+                    width={ 15 }
+                />
+
+                <span>
+                    Añadir a la bolsa
+                </span>
+            </Button>
         </div>
     );
 };

@@ -4,9 +4,9 @@ import { CircleMinusIcon, PlusCircleIcon, TrashIcon } from 'lucide-react';
 import Image from 'next/image';
 
 import Button from '@/components/atoms/Button/Button';
-import PokedollarIcon from '@/components/atoms/PokedollarIcon';
+import PokedollarIcon from '@/components/atoms/PokedollarIcon/PokedollarIcon';
 import useCart from '@/hooks/useCart';
-import toCOP from '@/lib/toCOP';
+import toPokedollars from '@/lib/toPokedollars';
 import { Item } from '@/types/cart';
 
 interface CartItemProps {
@@ -34,7 +34,7 @@ const ItemCardMini = ({ item }: CartItemProps) => {
 
                     <div className='text-yellow-500 flex gap-1 items-center'>
                         <span>
-                            { toCOP(item.pkmn.price) }
+                            { toPokedollars(item.pkmn.price) }
                         </span>
 
                         <div className='w-2'>

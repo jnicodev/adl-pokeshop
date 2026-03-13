@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
-import CartSection from '@/components/molecules/CartSection';
+import RocketSection from '@/components/atoms/RocketSection/RocketSection';
 import SignInForm from '@/components/molecules/SignInForm';
 import SignUpForm from '@/components/molecules/SignUpForm';
 import { INTRO_PHRASES, IntroPhraseKey } from '@/types/auth';
@@ -15,7 +15,7 @@ const Home = () => {
 
     return (
         <div className='flex flex-col gap-7 items-center p-5'>
-            <CartSection className='w-full max-w-lg'>
+            <RocketSection className='w-full max-w-lg'>
                 <div className='text-center flex flex-col gap-10 py-10 px-5'>
                     <h1 className='font-bold text-3xl text-mauve-200'>
                         { INTRO_PHRASES[action] }
@@ -24,7 +24,7 @@ const Home = () => {
                     { action === 'Welcome' &&
                         <div className='flex flex-col gap-2'>
                             <Button
-                                color='danger'
+                                color='ok'
                                 onPress={ () => setAction('Old') }
                             >
                                 Sí, sé lo que necesito...
@@ -35,7 +35,7 @@ const Home = () => {
                             </Button>
 
                             <Button
-                                color='ok'
+                                color='support'
                                 onPress={ () => setAction('Ask') }
                             >
                                 Busco una tienda...
@@ -63,7 +63,7 @@ const Home = () => {
                                 </Button>
 
                                 <Button
-                                    color='danger'
+                                    color='support'
                                     onPress={ () => setAction('New') }
                                 >
                                     No, solo &#34;productos&#34;...
@@ -83,14 +83,14 @@ const Home = () => {
 
                     { action === 'Police' &&
                         <Button
-                            color='danger'
+                            color='support'
                             onPress={ () => setAction('Welcome') }
                         >
                             (¡Salir corriendo!)
                         </Button>
                     }
                 </div>
-            </CartSection>
+            </RocketSection>
 
             { action === 'Police' ?
                 <div className='w-62.5 h-112.5 relative'>

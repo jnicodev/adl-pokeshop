@@ -6,7 +6,7 @@ interface CartSectionProps {
     className?: string;
 }
 
-const CartSection = ({ children, className }: CartSectionProps) => {
+const RocketSection = ({ children, className }: CartSectionProps) => {
     return (
         <div className={ cn('border border-red-500', className) }>
             <div className='border-2 border-neutral-900'>
@@ -18,4 +18,4 @@ const CartSection = ({ children, className }: CartSectionProps) => {
     );
 };
 
-export default CartSection;
+export default RocketSection;
