@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
+import ItemControls from '@/components/atoms/ItemControls/ItemControls';
 import Pokedollars from '@/components/atoms/Pokedollars/Pokedollars';
 import useCart from '@/hooks/useCart';
 import { Pkmn } from '@/types/pkmn';
@@ -16,6 +17,7 @@ interface ItemCardProps {
 
 const ItemCard = ({ pkmn }: ItemCardProps) => {
     const cart = useCart();
+    const item = cart.findItem(pkmn.name);
 
     // STATES
     const [ turn, setTurn ] = useState<boolean>(false);
@@ -56,21 +58,10 @@ const ItemCard = ({ pkmn }: ItemCardProps) => {
                 <Pokedollars value={ pkmn.price } />
             </div>
 
-            <Button
-                className='flex gap-2 items-center'
-                onPress={ () => cart.addItem(pkmn) }
-            >
-                <Image
-                    alt='Pokeball'
-                    height={ 15 }
-                    src='/imgs/pokeball.png'
-                    width={ 15 }
-                />
-
-                <span>
-                    Añadir a la bolsa
-                </span>
-            </Button>
+            <ItemControls
+                item={ item }
+                pkmn={ pkmn }
+            />
         </div>
     );
 };

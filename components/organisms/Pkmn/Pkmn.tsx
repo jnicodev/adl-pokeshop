@@ -3,8 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
-import Button from '@/components/atoms/Button/Button';
 import ErrorMessage from '@/components/atoms/ErrorMessage/ErrorMessage';
+import ItemControls from '@/components/atoms/ItemControls/ItemControls';
 import Loading from '@/components/atoms/Loading/Loading';
 import RocketSection from '@/components/atoms/RocketSection/RocketSection';
 import useCart from '@/hooks/useCart';
@@ -16,6 +16,7 @@ interface PkmnProps {
 
 const Pkmn = ({ name }: PkmnProps) => {
     const cart = useCart();
+    const item = cart.findItem(name);
 
     // QUERIES
     const { data: creature, isError, isLoading } = useQuery({
@@ -61,32 +62,21 @@ const Pkmn = ({ name }: PkmnProps) => {
                     width={ creature.pokeApi.height * 20 }
                 />
 
-                <div className='text-mauve-300 flex flex-col gap-1 items-center mt-5'>
-                    <h1 className='text-4xl font-bold capitalize'>
-                        { creature.pokeApi.name }
-                    </h1>
-
+                <div className='text-mauve-300 flex flex-col gap-3 items-center mt-5'>
                     <p className='text-sm'>
                         #
                         { creature.pokeApi.id }
                     </p>
-                </div>
 
-                <Button
-                    className='flex gap-2 items-center mt-3'
-                    onPress={ () => cart.addItem(creature?.pkmn) }
-                >
-                    <Image
-                        alt='Pokeball'
-                        height={ 15 }
-                        src='/imgs/pokeball.png'
-                        width={ 15 }
+                    <h1 className='text-4xl font-bold capitalize'>
+                        { creature.pokeApi.name }
+                    </h1>
+
+                    <ItemControls
+                        item={ item }
+                        pkmn={ creature.pkmn }
                     />
-
-                    <span>
-                        Añadir a la bolsa
-                    </span>
-                </Button>
+                </div>
 
                 <div className='flex gap-3 items-center mt-10'>
                     <h2 className='font-semibold text-white'>

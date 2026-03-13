@@ -1,11 +1,9 @@
 'use client';
 
-import { CircleMinusIcon, PlusCircleIcon, TrashIcon } from 'lucide-react';
 import Image from 'next/image';
 
-import Button from '@/components/atoms/Button/Button';
+import ItemControls from '@/components/atoms/ItemControls/ItemControls';
 import Pokedollars from '@/components/atoms/Pokedollars/Pokedollars';
-import useCart from '@/hooks/useCart';
 import { Item } from '@/types/cart';
 
 interface CartItemProps {
@@ -13,8 +11,6 @@ interface CartItemProps {
 }
 
 const ItemCardMini = ({ item }: CartItemProps) => {
-    const cart = useCart();
-
     return (
         <div className='flex items-center justify-between bg-neutral-800 pr-5'>
             <div className='flex items-center'>
@@ -38,39 +34,10 @@ const ItemCardMini = ({ item }: CartItemProps) => {
                 </div>
             </div>
 
-            <div className='flex gap-2 items-center'>
-                <Button
-                    color='clear'
-                    onPress={ () => cart.deleteItem(item.pkmn) }
-                    size='xs'
-                >
-                    { item.quantity > 1 ?
-                        <CircleMinusIcon />
-                        :
-                        <TrashIcon />
-                    }
-                </Button>
-
-                <div className='w-5 h-5 relative'>
-                    <Image
-                        alt='Pokeball'
-                        fill
-                        src='/imgs/pokeball.png'
-                    />
-                </div>
-
-                <span className='font-bold text-white'>
-                    { item.quantity }
-                </span>
-
-                <Button
-                    color='clear'
-                    onPress={ () => cart.addItem(item.pkmn) }
-                    size='xs'
-                >
-                    <PlusCircleIcon />
-                </Button>
-            </div>
+            <ItemControls
+                item={ item }
+                pkmn={ item.pkmn }
+            />
         </div>
     );
 };

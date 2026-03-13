@@ -10,6 +10,7 @@ type CartContextValue = {
     buy: () => void;
     deleteItem: (pkmn: Pkmn) => void;
     empty: () => void;
+    findItem: (pkmnName: string) => Item | undefined;
     isOpen: boolean;
     items: Item[];
     show: (value: boolean) => void;
@@ -65,6 +66,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         toast.success('Pokémon AÑADIDO a la bolsa');
     };
 
+    const findItem = (pkmnName: string) => {
+        return items.find(item => item.pkmn.name === pkmnName);
+    };
+
     const deleteItem = (pkmn: Pkmn) => {
         setItems(prev => {
             return prev
@@ -117,6 +122,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 buy,
                 deleteItem,
                 empty,
+                findItem,
                 isOpen,
                 items,
                 show,

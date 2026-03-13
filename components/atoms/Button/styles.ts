@@ -7,7 +7,7 @@ export const buttonStyles = tv({
     },
     variants: {
         color: {
-            clear: 'text-neutral-500 hover:text-neutral-100',
+            clear: 'text-mauve-500 hover:text-neutral-100',
             neutral: 'text-cyan-50 bg-linear-to-r from-mauve-800 to-mauve-700 border-2 border-mauve-700',
             ok: 'text-cyan-50 bg-linear-to-r from-taupe-800 to-taupe-700 border-2 border-taupe-700',
             support: 'text-cyan-50 bg-linear-to-r from-olive-800 to-olive-700 border-2 border-olive-700',
