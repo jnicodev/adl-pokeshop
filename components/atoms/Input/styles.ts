@@ -1,7 +1,7 @@
 import { tv, VariantProps } from 'tailwind-variants';
 
 export const inputStyles = tv({
-    base: 'text-lg p-3 border border-stone-600',
+    base: 'font-semibold text-lg text-white bg-neutral-800 placeholder:text-neutral-400 p-3 border border-neutral-600',
 });
 
 export type InputVariants = VariantProps<typeof inputStyles>;

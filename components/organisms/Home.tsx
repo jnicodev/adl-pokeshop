@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
+import CartSection from '@/components/molecules/CartSection';
 import SignInForm from '@/components/molecules/SignInForm';
 import SignUpForm from '@/components/molecules/SignUpForm';
 import { INTRO_PHRASES, IntroPhraseKey } from '@/types/auth';
@@ -13,81 +14,83 @@ const Home = () => {
     const [ action, setAction ] = useState<IntroPhraseKey>('Welcome');
 
     return (
-        <div className='flex flex-col gap-7 items-center p-3'>
-            <div className='w-full max-w-xl text-center flex flex-col gap-10 py-10 px-5 bg-stone-100 border-8 border-stone-400 rounded-3xl shadow-xl'>
-                <h1 className='font-bold text-3xl'>
-                    { INTRO_PHRASES[action] }
-                </h1>
+        <div className='flex flex-col gap-7 items-center p-5'>
+            <CartSection className='w-full max-w-lg'>
+                <div className='text-center flex flex-col gap-10 py-10 px-5'>
+                    <h1 className='font-bold text-3xl text-mauve-200'>
+                        { INTRO_PHRASES[action] }
+                    </h1>
 
-                { action === 'Welcome' &&
-                    <div className='flex flex-col gap-1'>
-                        <Button
-                            color='danger'
-                            onPress={ () => setAction('Old') }
-                        >
-                            Sí, sé lo que necesito...
-                        </Button>
-
-                        <Button onPress={ () => setAction('New') }>
-                            No, pero te he visto...
-                        </Button>
-
-                        <Button
-                            color='ok'
-                            onPress={ () => setAction('Ask') }
-                        >
-                            Busco una tienda...
-                        </Button>
-                    </div>
-                }
-
-                { action === 'Ask' &&
-                    <div className='flex flex-col gap-5'>
-                        <div className='w-10 h-10 relative self-center'>
-                            <Image
-                                alt='Pokeball'
-                                fill
-                                objectFit='contain'
-                                src='/pokeball.png'
-                            />
-                        </div>
-
-                        <div className='flex flex-col gap-1'>
-                            <Button
-                                color='ok'
-                                onPress={ () => setAction('Police') }
-                            >
-                                ¡Claro!
-                            </Button>
-
+                    { action === 'Welcome' &&
+                        <div className='flex flex-col gap-2'>
                             <Button
                                 color='danger'
-                                onPress={ () => setAction('New') }
+                                onPress={ () => setAction('Old') }
                             >
-                                No, solo &#34;productos&#34;...
+                                Sí, sé lo que necesito...
+                            </Button>
+
+                            <Button onPress={ () => setAction('New') }>
+                                No, pero te he visto...
+                            </Button>
+
+                            <Button
+                                color='ok'
+                                onPress={ () => setAction('Ask') }
+                            >
+                                Busco una tienda...
                             </Button>
                         </div>
-                    </div>
-                }
+                    }
 
-                { action === 'New' &&
-                    <SignUpForm
-                        onBack={ () => setAction('Ask') }
-                        onContinue={ () => setAction('Old') }
-                    />
-                }
+                    { action === 'Ask' &&
+                        <div className='flex flex-col gap-5'>
+                            <div className='w-10 h-10 relative self-center'>
+                                <Image
+                                    alt='Pokeball'
+                                    fill
+                                    objectFit='contain'
+                                    src='/pokeball.png'
+                                />
+                            </div>
 
-                { action === 'Old' && <SignInForm onContinue={ () => setAction('Welcome') } /> }
+                            <div className='flex flex-col gap-2'>
+                                <Button
+                                    color='ok'
+                                    onPress={ () => setAction('Police') }
+                                >
+                                    ¡Claro!
+                                </Button>
 
-                { action === 'Police' &&
-                    <Button
-                        color='danger'
-                        onPress={ () => setAction('Welcome') }
-                    >
-                        (¡Salir corriendo!)
-                    </Button>
-                }
-            </div>
+                                <Button
+                                    color='danger'
+                                    onPress={ () => setAction('New') }
+                                >
+                                    No, solo &#34;productos&#34;...
+                                </Button>
+                            </div>
+                        </div>
+                    }
+
+                    { action === 'New' &&
+                        <SignUpForm
+                            onBack={ () => setAction('Ask') }
+                            onContinue={ () => setAction('Old') }
+                        />
+                    }
+
+                    { action === 'Old' && <SignInForm onContinue={ () => setAction('Welcome') } /> }
+
+                    { action === 'Police' &&
+                        <Button
+                            color='danger'
+                            onPress={ () => setAction('Welcome') }
+                        >
+                            (¡Salir corriendo!)
+                        </Button>
+                    }
+                </div>
+            </CartSection>
 
             { action === 'Police' ?
                 <div className='w-62.5 h-112.5 relative'>

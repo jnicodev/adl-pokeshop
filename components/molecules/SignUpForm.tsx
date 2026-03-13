@@ -58,7 +58,7 @@ const SignUpForm = ({ onBack, onContinue }: SignUpFormProps) => {
                 render={ ({ field }) =>
                     <Input
                         { ...field }
-                        className='text-center disabled:bg-green-100 disabled:border-green-600'
+                        className='text-center disabled:bg-green-900 disabled:border-green-700'
                         disabled={ ready }
                         onChange={ event => {
                             field.onChange(event);
@@ -72,11 +72,11 @@ const SignUpForm = ({ onBack, onContinue }: SignUpFormProps) => {
 
             { nickname &&
                 <div className='flex flex-col gap-2 mb-10'>
-                    <div className='font-bold text-sky-800'>
+                    <div className='font-bold text-mauve-300'>
                         Recuerda tu clave:
                     </div>
 
-                    <div className='font-unown text-9xl lowercase leading-14'>
+                    <div className='font-unown text-9xl lowercase leading-26 bg-neutral-500'>
                         { nickname.slice(0, 3) }
                     </div>
                 </div>
@@ -87,7 +87,7 @@ const SignUpForm = ({ onBack, onContinue }: SignUpFormProps) => {
                     Gracias, recordaré mi clave de Unowns
                 </Button>
                 :
-                <div className='flex flex-col gap-1'>
+                <div className='flex flex-col gap-2'>
                     <Button
                         color='ok'
                         type='submit'

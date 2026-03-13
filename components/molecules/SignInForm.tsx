@@ -98,12 +98,12 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
                 render={ ({ field }) =>
                     <div className='flex flex-col gap-5'>
                         <div className='flex flex-col gap-0.5'>
-                            <p className='font-bold text-sky-800'>
+                            <p className='font-bold text-mauve-300'>
                                 Selecciona tus 3 Unowns
                             </p>
 
                             { showHint &&
-                                <p className='text-sm text-amber-600'>
+                                <p className='text-sm text-yellow-500'>
                                     PISTA: Las primeras 3 letras de tu última escritura.
                                 </p>
                             }
@@ -127,7 +127,7 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
                                         </span>
 
                                         { showAbc &&
-                                            <span className='font-bold text-amber-600 mb-1 absolute top-2 left-3'>
+                                            <span className='font-bold text-yellow-500 mb-1 absolute top-2 left-3'>
                                                 { letter.toUpperCase() }
                                             </span>
                                         }
@@ -139,7 +139,7 @@ const SignInForm = ({ onContinue }: SignInFromProps) => {
                 }
             />
 
-            <div className='flex flex-col gap-1'>
+            <div className='flex flex-col gap-2'>
                 <Button
                     color='ok'
                     type='submit'
