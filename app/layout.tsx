@@ -36,7 +36,6 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
                     { children }
 
                     <Toaster
-                        closeButton
                         position='bottom-center'
                         richColors
                         toastOptions={ {

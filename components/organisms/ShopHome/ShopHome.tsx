@@ -8,8 +8,8 @@ import { useState } from 'react';
 import Button from '@/components/atoms/Button/Button';
 import ErrorMessage from '@/components/atoms/ErrorMessage/ErrorMessage';
 import Loading from '@/components/atoms/Loading/Loading';
-import ItemCard from '@/components/molecules/ItemCard/ItemCard';
 import RocketSection from '@/components/atoms/RocketSection/RocketSection';
+import ItemCard from '@/components/molecules/ItemCard/ItemCard';
 import { PkmnIndex } from '@/types/api';
 
 const ShopHome = () => {
@@ -41,7 +41,7 @@ const ShopHome = () => {
                     <Image
                         alt='Pokeball'
                         height={ 40 }
-                        src='/pokeball.png'
+                        src='/imgs/pokeball.png'
                         width={ 40 }
                     />
 

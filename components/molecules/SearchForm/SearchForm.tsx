@@ -13,6 +13,7 @@ const SearchForm = () => {
     const router = useRouter();
     const form = useForm<SearchFormData>();
 
+    // METHODS
     const handleSubmit = (data: SearchFormData) => {
         router.push(`/shop/pkmn/${ data.name.toLowerCase() }`);
     };

@@ -1,10 +1,7 @@
-
-import SignUpForm from '@/components/molecules/SignUpForm';
-import Home from "@/components/organisms/Home";
+import Home from '@/components/organisms/Home/Home';
 
 export default function HomePage() {
     return (
-
         <Home />
     );
 }

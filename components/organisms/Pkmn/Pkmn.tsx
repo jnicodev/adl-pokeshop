@@ -42,7 +42,7 @@ const Pkmn = ({ name }: PkmnProps) => {
                     <Image
                         alt='Team Rocket'
                         fill
-                        src='/team_rocket_duo.png'
+                        src='/imgs/team_rocket_duo.png'
                     />
                 </div>
             </div>
@@ -79,7 +79,7 @@ const Pkmn = ({ name }: PkmnProps) => {
                     <Image
                         alt='Pokeball'
                         height={ 15 }
-                        src='/pokeball.png'
+                        src='/imgs/pokeball.png'
                         width={ 15 }
                     />
 

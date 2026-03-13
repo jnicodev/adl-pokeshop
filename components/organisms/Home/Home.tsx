@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
 import RocketSection from '@/components/atoms/RocketSection/RocketSection';
-import SignInForm from '@/components/molecules/SignInForm';
-import SignUpForm from '@/components/molecules/SignUpForm';
+import SignInForm from '@/components/molecules/SignInForm/SignInForm';
+import SignUpForm from '@/components/molecules/SignUpForm/SignUpForm';
 import { INTRO_PHRASES, IntroPhraseKey } from '@/types/auth';
 
 const Home = () => {
@@ -50,7 +50,7 @@ const Home = () => {
                                     alt='Pokeball'
                                     fill
                                     objectFit='contain'
-                                    src='/pokeball.png'
+                                    src='/imgs/pokeball.png'
                                 />
                             </div>
 
@@ -93,21 +93,21 @@ const Home = () => {
             </RocketSection>
 
             { action === 'Police' ?
-                <div className='w-62.5 h-112.5 relative'>
+                <div className='w-75 h-139 relative'>
                     <Image
-                        alt='a'
+                        alt='Jenny'
                         fill
                         objectFit='contain'
-                        src='/jenny.png'
+                        src='/imgs/jenny_police.png'
                     />
                 </div>
                 :
-                <div className='w-50 h-112.5 relative'>
+                <div className='w-60 h-139 relative'>
                     <Image
-                        alt='a'
+                        alt='Giovanny'
                         fill
                         objectFit='contain'
-                        src='/giovanni.png'
+                        src='/imgs/giovanni_rocket.png'
                     />
                 </div>
             }

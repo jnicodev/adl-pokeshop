@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -6,6 +7,7 @@ import { Pkmn } from '@/types/pkmn';
 
 type CartContextValue = {
     addItem: (pkmn: Pkmn) => void;
+    buy: () => void;
     deleteItem: (pkmn: Pkmn) => void;
     empty: () => void;
     isOpen: boolean;
@@ -20,6 +22,8 @@ type CartContextValue = {
 export const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+    const router = useRouter();
+
     // STATES
     const [ items, setItems ] = useState<Item[]>([]);
     const [ isOpen, setIsOpen ] = useState(false);
@@ -83,6 +87,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         toast.success('Todos los Pokémon han sido removidos');
     };
 
+    const buy = () => {
+        alert('TU CUENTA DE BANCO HA SIDO SAQUEADA EXITOSAMENTE, gracias.');
+
+        empty();
+        router.push('/');
+    };
+
     // EFFECTS
     // Carga los Items del carrito desde el localStorage
     useEffect(() => {
@@ -103,6 +114,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         <CartContext.Provider
             value={ {
                 addItem,
+                buy,
                 deleteItem,
                 empty,
                 isOpen,

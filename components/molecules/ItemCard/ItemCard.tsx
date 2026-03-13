@@ -16,6 +16,8 @@ interface ItemCardProps {
 
 const ItemCard = ({ pkmn }: ItemCardProps) => {
     const cart = useCart();
+
+    // STATES
     const [ turn, setTurn ] = useState<boolean>(false);
 
     return (
@@ -61,7 +63,7 @@ const ItemCard = ({ pkmn }: ItemCardProps) => {
                 <Image
                     alt='Pokeball'
                     height={ 15 }
-                    src='/pokeball.png'
+                    src='/imgs/pokeball.png'
                     width={ 15 }
                 />
 

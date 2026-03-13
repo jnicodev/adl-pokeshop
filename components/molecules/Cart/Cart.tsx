@@ -5,11 +5,10 @@ import Image from 'next/image';
 import { Dialog, Modal, ModalOverlay, ModalOverlayProps as RACModalOverlayProps } from 'react-aria-components';
 
 import Button from '@/components/atoms/Button/Button';
-import PokedollarIcon from '@/components/atoms/PokedollarIcon';
-import CartSection from '@/components/molecules/CartSection';
-import ItemCardMini from '@/components/molecules/ItemCardMini';
+import Pokedollars from '@/components/atoms/Pokedollars/Pokedollars';
+import RocketSection from '@/components/atoms/RocketSection/RocketSection';
+import ItemCardMini from '@/components/molecules/ItemCardMini/ItemCardMini';
 import useCart from '@/hooks/useCart';
-import toCOP from '@/lib/toCOP';
 
 const Cart = ({ ...props }: RACModalOverlayProps) => {
     const cart = useCart();
@@ -23,7 +22,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
             { ...props }
         >
             <div className='w-full flex items-center justify-center sticky top-0 left-0'>
-                <CartSection className='w-full max-w-lg'>
+                <RocketSection className='w-full max-w-lg'>
                     <Modal
                         className='p-5'
                         { ...props }
@@ -64,7 +63,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                         <Image
                                             alt='Team Rocket'
                                             fill
-                                            src='/team_rocket_duo.png'
+                                            src='/imgs/team_rocket_duo.png'
                                         />
                                     </div>
                                 </div>
@@ -84,13 +83,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                     Pokedólares a pagar:
                                 </div>
 
-                                <span className='font-semibold flex gap-2 items-center'>
-                                    { toCOP(cart.total.pokedollars) }
-
-                                    <div className='w-3'>
-                                        <PokedollarIcon />
-                                    </div>
-                                </span>
+                                <Pokedollars value={ cart.total.pokedollars } />
                             </div>
 
                             { cart.total.items > 0 &&
@@ -103,7 +96,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                             }
                         </Dialog>
                     </Modal>
-                </CartSection>
+                </RocketSection>
             </div>
         </ModalOverlay>
     );

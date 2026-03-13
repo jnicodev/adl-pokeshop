@@ -1,9 +1,9 @@
 import { Checkbox as RACCheckbox, CheckboxProps as RACCheckboxProps } from 'react-aria-components';
 import { cn } from 'tailwind-variants';
 
-import { checkboxStyles } from '@/components/atoms/Checkbox/styles';
+import { checkboxStyles, CheckboxVariants } from '@/components/atoms/Checkbox/styles';
 
-interface CheckboxProps extends RACCheckboxProps {
+interface CheckboxProps extends CheckboxVariants, RACCheckboxProps {
 
 }
 

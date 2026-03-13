@@ -2,20 +2,15 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { LogOutIcon } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/atoms/Button/Button';
 import CartButton from '@/components/atoms/CartButton/CartButton';
 import MainLogoButton from '@/components/atoms/MainLogoButton/MainLogoButton';
-import Pokedollars from '@/components/atoms/Pokedollars/Pokedollars';
-import RocketSection from '@/components/molecules/RocketSection';
-import useCart from '@/hooks/useCart';
+import RocketSection from '@/components/atoms/RocketSection/RocketSection';
 
 const MainMenu = () => {
     const router = useRouter();
-    const cart = useCart();
 
     // MUTATIONS
     const signOut = useMutation({
@@ -30,6 +25,8 @@ const MainMenu = () => {
             return json;
         },
     });
+
+    // METHODS
     const handleSignOut = async () => {
         try {
             await signOut.mutateAsync();

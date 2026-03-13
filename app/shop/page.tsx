@@ -1,4 +1,4 @@
-import ShopHome from '@/components/organisms/ShopHome';
+import ShopHome from '@/components/organisms/ShopHome/ShopHome';
 
 const ShopPage = () => {
     return (

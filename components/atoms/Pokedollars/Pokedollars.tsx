@@ -1,17 +1,18 @@
-import toPokedollars from '@/lib/toPokedollars';
+import { pokedollarsStyles, PokedollarsVariants } from '@/components/atoms/Pokedollars/styles';
 
-interface PokedollarsProps {
+interface PokedollarsProps extends PokedollarsVariants {
     value: number;
 }
 
-const Pokedollars = ({ value }: PokedollarsProps) => {
+const Pokedollars = ({ size, value }: PokedollarsProps) => {
+    const styles = pokedollarsStyles({ size });
     const price = new Intl.NumberFormat('co-ES', { currency: 'COP' }).format(value);
 
     return (
-        <span className='font-semibold text-2xl text-yellow-500 flex gap-2 items-center'>
+        <span className={ styles.base() }>
             { price }
 
-            <div className='w-2.5'>
+            <div className={ styles.icon() }>
                 <svg
                     fill='#eab308'
                     height='100%'

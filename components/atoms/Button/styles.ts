@@ -8,9 +8,9 @@ export const buttonStyles = tv({
     variants: {
         color: {
             clear: 'text-neutral-500 hover:text-neutral-100',
-            danger: 'text-cyan-50 bg-linear-to-r from-olive-800 to-olive-700 border-2 border-olive-700',
             neutral: 'text-cyan-50 bg-linear-to-r from-mauve-800 to-mauve-700 border-2 border-mauve-700',
             ok: 'text-cyan-50 bg-linear-to-r from-taupe-800 to-taupe-700 border-2 border-taupe-700',
+            support: 'text-cyan-50 bg-linear-to-r from-olive-800 to-olive-700 border-2 border-olive-700',
         },
         size: {
             xs: 'p-1.5',
