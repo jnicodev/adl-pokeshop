@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { Session } from '@/types/session';
 
-const file = path.join('/tmp/', 'data/sessions.json');
+const file = path.join('/tmp/', 'tmp/sessions.json');
 
 export const getSessions = async (): Promise<Session[]> => {
     const data = await readFile(file, 'utf-8');
