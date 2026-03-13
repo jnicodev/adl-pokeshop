@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { Cart, Item } from '@/types/cart';
 import { Pkmn } from '@/types/pkmn';
+import { toast } from "sonner";
 
 type CartContextValue = {
     addItem: (pkmn: Pkmn) => void;
@@ -56,6 +57,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
             return [ ...prev, { pkmn, quantity: 1 } ];
         });
+
+        toast.success('Pokémon AÑADIDO a la bolsa');
     };
 
     const deleteItem = (pkmn: Pkmn) => {
@@ -69,13 +72,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                     return item;
                 })
                 .filter(item => item.quantity > 0);
-        }
-        );
+        });
+
+        toast.success('Pokémon REMOVIDO de la bolsa');
     };
 
     const empty = () => {
         localStorage.removeItem('cart');
         setItems([]);
+        toast.success('Todos los Pokémon han sido removidos');
     };
 
     // EFFECTS
