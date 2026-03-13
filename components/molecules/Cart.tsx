@@ -16,7 +16,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
 
     return (
         <ModalOverlay
-            className='w-full h-screen bg-linear-to-b from-rose-950/90 to-neutral-950/90 backdrop-blur-sm p-3 absolute top-0 left-0'
+            className='w-full h-screen bg-linear-to-b from-rose-950/90 to-neutral-950/90 backdrop-blur-sm p-3 absolute top-0 left-0 z-60'
             isDismissable
             isOpen={ cart.isOpen }
             onOpenChange={ value => cart.show(value) }

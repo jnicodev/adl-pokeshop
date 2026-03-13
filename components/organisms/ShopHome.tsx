@@ -1,19 +1,23 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { ArrowBigLeftIcon, ArrowBigRightIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 
+import Button from '@/components/atoms/Button/Button';
 import CartSection from '@/components/molecules/CartSection';
 import ItemCard from '@/components/molecules/ItemCard';
 import { PkmnIndex } from '@/types/api';
 
 const ShopHome = () => {
+    // STATES
+    const [ offset, setOffset ] = useState(0);
+
     // QUERIES
     const { data: pkmnIndex, isError, isLoading } = useQuery({
         queryFn: async (): Promise<PkmnIndex> => {
-            const response = await fetch('/api/pkmn', {
-                method: 'GET',
-            });
+            const response = await fetch(`/api/pkmn?offset=${ offset }`);
 
             const json = await response.json();
 
@@ -21,7 +25,7 @@ const ShopHome = () => {
 
             return json;
         },
-        queryKey: [ 'pkmn' ],
+        queryKey: [ 'pkmn', offset ],
     });
 
     if (isLoading) {
@@ -62,7 +66,6 @@ const ShopHome = () => {
                     </div>
                 </div>
 
-
                 <div className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
                     { pkmnIndex?.results?.map(pkmn =>
                         <ItemCard
@@ -70,6 +73,24 @@ const ShopHome = () => {
                             pkmn={ pkmn }
                         />
                     ) }
+                </div>
+
+                <div className='flex gap-5 justify-center'>
+                    { offset > 0 &&
+                        <Button
+                            color='danger'
+                            onPress={ () => setOffset(prev => Math.max(prev - 24, 0)) }
+                        >
+                            <ArrowBigLeftIcon />
+                        </Button>
+                    }
+
+                    <Button
+                        color='danger'
+                        onPress={ () => setOffset(prev => prev + 24) }
+                    >
+                        <ArrowBigRightIcon />
+                    </Button>
                 </div>
             </div>
         </CartSection>
