@@ -21,7 +21,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
             onOpenChange={ value => cart.show(value) }
             { ...props }
         >
-            <div className='w-full flex items-center justify-center sticky top-0 left-0'>
+            <div className='w-full flex items-center justify-center sticky top-10 left-0'>
                 <RocketSection className='w-full max-w-lg'>
                     <Modal
                         className='p-5'
@@ -59,7 +59,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                         .
                                     </span>
 
-                                    <div className='size-100 relative'>
+                                    <div className='size-80 relative'>
                                         <Image
                                             alt='Team Rocket'
                                             fill
@@ -78,21 +78,23 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                 ) }
                             </div>
 
-                            <div className='text-yellow-500 text-xl flex gap-2 items-center self-center'>
-                                <div>
-                                    Pokedólares a pagar:
-                                </div>
-
-                                <Pokedollars value={ cart.total.pokedollars } />
-                            </div>
-
                             { cart.total.items > 0 &&
-                                <Button
-                                    className='self-center'
-                                    onPress={ cart.buy }
-                                >
-                                    Finalizar compra
-                                </Button>
+                                <>
+                                    <div className='text-yellow-500 text-xl flex gap-2 items-center self-center'>
+                                        <div>
+                                            Pokedólares a pagar:
+                                        </div>
+
+                                        <Pokedollars value={ cart.total.pokedollars } />
+                                    </div>
+
+                                    <Button
+                                        className='self-center'
+                                        onPress={ cart.buy }
+                                    >
+                                        Finalizar compra
+                                    </Button>
+                                </>
                             }
                         </Dialog>
                     </Modal>

@@ -34,13 +34,13 @@ const Pkmn = ({ name }: PkmnProps) => {
 
     return (
         <RocketSection>
-            <div className='flex gap-10 flex-col items-center sm:p-5'>
+            <div className='flex flex-col items-center sm:p-5'>
                 <PkmnHero
                     pkmn={ creature.pkmn }
                     pokeApiPkmn={ creature.pokeApi }
                 />
 
-                <div className='flex gap-10 flex-col sm:gap-15 sm:flex-row'>
+                <div className='flex gap-10 flex-col p-10 sm:gap-15 sm:flex-row'>
                     <div className='flex gap-5 flex-col items-center'>
                         <div className='flex gap-2 flex-col items-center'>
                             <h2 className='font-semibold text-white'>

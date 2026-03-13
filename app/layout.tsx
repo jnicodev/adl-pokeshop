@@ -36,13 +36,14 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode;
                     { children }
 
                     <Toaster
-                        position='bottom-center'
-                        richColors
+                        position='top-center'
                         toastOptions={ {
+                            duration: 2000,
                             style: {
                                 fontSize: '15px',
                             }
                         } }
+                        visibleToasts={ 1 }
                     />
                 </Providers>
             </body>
