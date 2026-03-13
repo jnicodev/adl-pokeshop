@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { User } from '@/types/user';
 
-const file = path.join(process.cwd(), '/tmp/data/users.json');
+const file = path.join('/tmp/', 'data/users.json');
 
 export const getUsers = async (): Promise<User[]> => {
     const data = await readFile(file, 'utf-8');
