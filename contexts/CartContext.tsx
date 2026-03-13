@@ -9,7 +9,10 @@ type CartContextValue = {
     isOpen: boolean;
     items: Item[];
     show: (value: boolean) => void;
-    total: number;
+    total: {
+        items: number;
+        pokedollars: number;
+    }
 };
 
 export const CartContext = createContext<CartContextValue | undefined>(undefined);
@@ -19,7 +22,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [ items, setItems ] = useState<Item[]>([]);
     const [ isOpen, setIsOpen ] = useState(false);
 
-    const total = useMemo(() => {
+    const totalItems = useMemo(() => {
+        return items.reduce((sum, item) => {
+            return sum + item.quantity;
+        }, 0);
+    }, [ items ]);
+
+    const totalCost = useMemo(() => {
         return items.reduce((sum, item) => {
             return sum + item.pkmn.price * item.quantity;
         }, 0);
@@ -76,8 +85,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     // Actualiza el carrito en el localStorage
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify({ items, total }));
-    }, [ items, total ]);
+        localStorage.setItem('cart', JSON.stringify({ items, totalCost }));
+    }, [ items, totalCost ]);
 
     return (
         <CartContext.Provider
@@ -87,7 +96,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 isOpen,
                 items,
                 show,
-                total,
+                total: {
+                    items: totalItems,
+                    pokedollars: totalCost,
+                },
             } }
         >
             { children }

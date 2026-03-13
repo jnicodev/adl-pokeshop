@@ -50,7 +50,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                 </div>
 
                                 <span className='font-semibold flex gap-2 items-center'>
-                                    { toCOP(cart.total) }
+                                    { toCOP(cart.total.pokedollars) }
 
                                     <div className='w-3'>
                                         <PokedollarIcon />

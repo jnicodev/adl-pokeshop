@@ -68,8 +68,8 @@ const MainMenu = () => {
                         width={ 70 }
                     />
 
-                    <span className='text-xs leading-1.5 bg-yellow-600 p-2 rounded-full absolute -top-2 -right-2'>
-                        { cart.items.length }
+                    <span className='text-xs leading-1.5 bg-mauve-500 p-2 border border-mauve-400 rounded-full absolute -top-2 -right-2'>
+                        { cart.total.items }
                     </span>
                 </Button>
 
