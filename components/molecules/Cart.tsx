@@ -16,7 +16,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
 
     return (
         <ModalOverlay
-            className='w-full h-screen bg-linear-to-b from-rose-950/60 to-neutral-950/60 backdrop-blur-sm p-3 absolute top-0 left-0'
+            className='w-full h-screen bg-linear-to-b from-rose-950/90 to-neutral-950/90 backdrop-blur-sm p-3 absolute top-0 left-0'
             isDismissable
             isOpen={ cart.isOpen }
             onOpenChange={ value => cart.show(value) }
@@ -43,7 +43,7 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                                         color='danger'
                                         onPress={ cart.empty }
                                     >
-                                        Vacíar bolsa Pokémon
+                                        Vaciar bolsa Pokémon
                                     </Button>
                                 }
                             </div>

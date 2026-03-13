@@ -2,6 +2,7 @@
 
 import { RefreshCcwIcon } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import Button from '@/components/atoms/Button/Button';
@@ -16,24 +17,30 @@ interface ItemCardProps {
 
 const ItemCard = ({ pkmn }: ItemCardProps) => {
     const cart = useCart();
-    const [ showBack, setShowBack ] = useState<boolean>(false);
+    const [ turn, setTurn ] = useState<boolean>(false);
 
     return (
         <div className='flex flex-col gap-2.5 bg-neutral-800 p-3 rounded'>
-            <div className='w-full h-40 flex items-center justify-center bg-linear-to-b from-red-900/30 via-neutral-900/30 to-stone-600/30 relative'>
-                <div className='size-40 relative'>
-                    <Image
-                        alt={ pkmn.name }
-                        fill
-                        src={ showBack ? pkmn.sprite.back : pkmn.sprite.front }
-                        style={ { imageRendering: 'pixelated' } }
-                    />
-                </div>
+            <div className='relative'>
+                <Link
+                    className='group relative'
+                    href={ `/shop/pkmn/${ pkmn.name }` }
+                >
+                    <div className='w-full h-40 flex items-center justify-center bg-linear-to-b from-red-800/40 via-neutral-900/50 to-stone-300/30 relative mx-auto transition-all group-hover:w-40 group-hover:rounded-full'>
+                        <Image
+                            alt={ pkmn.name }
+                            height={ 160 }
+                            src={ turn ? pkmn.sprite.front : pkmn.sprite.back }
+                            style={ { imageRendering: 'pixelated' } }
+                            width={ 160 }
+                        />
+                    </div>
+                </Link>
 
                 <Button
                     className='bg-neutral-800 rounded-none absolute top-0 left-0'
                     color='clear'
-                    onPress={ () => setShowBack(prev => !prev) }
+                    onPress={ () => setTurn(prev => !prev) }
                     size='xs'
                 >
                     <RefreshCcwIcon />
