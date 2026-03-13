@@ -7,7 +7,7 @@ import SearchForm from '@/components/molecules/SearchForm/SearchForm';
 const ShopLayout = ({ children }: Readonly<{ children: ReactNode; }>) => {
     return (
         <>
-            <div className='w-full max-w-7xl flex flex-col gap-5 p-4 mx-auto'>
+            <div className='w-full max-w-7xl flex flex-col gap-5 p-4 pb-30 mx-auto'>
                 <MainMenu />
 
                 <SearchForm />

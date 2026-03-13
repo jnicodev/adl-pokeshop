@@ -30,7 +30,7 @@ const SearchForm = () => {
                     render={ ({ field }) =>
                         <Input
                             { ...field }
-                            className='w-full font-bold placeholder:font-normal placeholder:text-neutral-700 text-2xl text-red-400'
+                            className='w-full font-bold text-2xl text-red-400 placeholder:font-normal placeholder:text-neutral-700 bg-neutral-900'
                             placeholder='Nombre o Pokédex ID'
                         />
                     }
