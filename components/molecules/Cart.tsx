@@ -2,6 +2,7 @@
 
 import { XIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Dialog, Modal, ModalOverlay, ModalOverlayProps as RACModalOverlayProps } from 'react-aria-components';
 
 import Button from '@/components/atoms/Button/Button';
@@ -12,6 +13,7 @@ import useCart from '@/hooks/useCart';
 import toCOP from '@/lib/toCOP';
 
 const Cart = ({ ...props }: RACModalOverlayProps) => {
+    const router = useRouter();
     const cart = useCart();
 
     return (
@@ -94,7 +96,13 @@ const Cart = ({ ...props }: RACModalOverlayProps) => {
                             </div>
 
                             { cart.total.items > 0 &&
-                                <Button className='self-center'>
+                                <Button
+                                    className='self-center'
+                                    onPress={ () => {
+                                        alert('TU CUENTA DE BANCO HA SIDO SAQUEADA EXITOSAMENTE ;D');
+                                        router.push('/');
+                                    } }
+                                >
                                     Finalizar compra
                                 </Button>
                             }

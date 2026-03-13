@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
+import { toast } from 'sonner';
 
 import { Cart, Item } from '@/types/cart';
 import { Pkmn } from '@/types/pkmn';
-import { toast } from "sonner";
 
 type CartContextValue = {
     addItem: (pkmn: Pkmn) => void;

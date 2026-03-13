@@ -29,7 +29,7 @@ const SearchForm = () => {
                     render={ ({ field }) =>
                         <Input
                             { ...field }
-                            className='w-full font-bold placeholder-neutral-700 text-2xl text-red-400'
+                            className='w-full font-bold placeholder:text-neutral-700 text-2xl text-red-400'
                             placeholder='Buscar por nombre'
                         />
                     }
