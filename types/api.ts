@@ -10,6 +10,7 @@ export type PkmnIndex = {
 };
 
 export type PokeApiPokemon = {
+    message: string;
     pkmn: Pkmn;
     pokeApi: PokeAPI.Pokemon;
 };

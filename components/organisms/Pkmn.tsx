@@ -41,6 +41,24 @@ const Pkmn = ({ name }: PkmnProps) => {
         );
     }
 
+    if (creature.message) {
+        return (
+            <div className='flex flex-col items-center'>
+                <div className='font-bold text-3xl p-6 text-center text-red-500'>
+                    Este Pokémon no existe (o no lo hemos robado aún...)
+                </div>
+
+                <div className='size-100 opacity-15 relative'>
+                    <Image
+                        alt='Team Rocket'
+                        fill
+                        src='/team_rocket_duo.png'
+                    />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <CartSection className='bg-neutral-900'>
             <div className='flex flex-col items-center p-10'>

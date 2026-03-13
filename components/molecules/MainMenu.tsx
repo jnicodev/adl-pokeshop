@@ -38,7 +38,7 @@ const MainMenu = () => {
     };
 
     return (
-        <CartSection>
+        <CartSection className='sticky top-0 z-50'>
             <nav className='flex items-center justify-between py-3 px-5'>
                 <Link
                     className='w-9 flex flex-col gap-0.5 items-center cursor-pointer'

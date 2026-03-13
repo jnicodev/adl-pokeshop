@@ -9,6 +9,8 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
     if (!response.ok) {
         return NextResponse.json({
             message: 'Pokémon no encontrado',
+        }, {
+            status: 400,
         });
     }
 
