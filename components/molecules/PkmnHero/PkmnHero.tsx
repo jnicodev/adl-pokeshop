@@ -19,11 +19,11 @@ const PkmnHero = ({ pkmn, pokeApiPkmn }: PkmnHeroProps) => {
         <div className='w-full flex gap-5 flex-col items-center justify-center bg-yellow-950/10 p-5 lg:flex-row'>
             <Image
                 alt={ pokeApiPkmn.name }
-                height={ pokeApiPkmn.height * 20 }
+                height={ Math.min(pokeApiPkmn.height * 20, 500) }
                 // @ts-expect-error Los types no cubren el guión medio
                 src={ pokeApiPkmn.sprites.versions['generation-v']['black-white']['animated']?.front_default }
                 style={ { imageRendering: 'pixelated' } }
-                width={ pokeApiPkmn.height * 20 }
+                width={ Math.min(pokeApiPkmn.height * 20, 500) }
             />
 
             <div className='text-mauve-300 flex gap-3 flex-col items-center'>
